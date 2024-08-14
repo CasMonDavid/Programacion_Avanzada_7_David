@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica 1</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="1080" height="880"></canvas>
+    <script>
+        const c = document.getElementById("myCanvas");
+        const ctx = c.getContext("2d");
+
+        ctx.fillStyle = "gray";
+        ctx.fillRect(20, 20, 100, 100);
+
+        ctx.fillStyle = "rgba(50, 10, 120, 0.5)";
+        ctx.fillRect(100, 100, 100, 100);
+
+        ctx.fillStyle = "rgba(255, 215, 7, 0.5)";
+        ctx.fillRect(190, 190, 100, 100);
+    </script>
+</body>
+</html>
