@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practica 1</title>
+    <title>Practica U2 A4</title>
 </head>
 <body>
     <canvas id="myCanvas" width="1080" height="880"></canvas>
     <script>
         const c = document.getElementById("myCanvas");
         const ctx = c.getContext("2d");
+
+        ctx.strokeRect(0, 0, 50, 50);
 
         ctx.fillStyle = "gray";
         ctx.fillRect(20, 20, 100, 100);
@@ -19,6 +21,59 @@
 
         ctx.fillStyle = "rgba(255, 215, 7, 0.5)";
         ctx.fillRect(190, 190, 100, 100);
+
+        ctx.fillStyle = "rgba(20, 10, 200)";
+        ctx.strokeStyle="black";
+        ctx.lineWith = 6;
+        ctx.strokeRect(280, 280, 100, 100);
+
+        ctx.beginPath();
+        ctx.moveTo(400,100);
+        ctx.lineTo(400,200);
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.strokeStyle="blue";
+        ctx.fillStyle = "rgb(40, 90, 180, 0.5)";
+        ctx.beginPath();
+        ctx.moveTo(600,100);
+        ctx.lineTo(500,400);
+        ctx.lineTo(700,400);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Practica 4
+        ctx.beginPath();
+        ctx.arc(700, 75, 50, 0, 2 * Math.PI);
+        ctx.strokeStyle="green";
+        ctx.fillStyle = "rgb(200, 90, 10, 0.5)";
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(700, 90, 20, 0, 1 * Math.PI);
+        ctx.strokeStyle="black";
+        ctx.fillStyle = "white";
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(680, 65, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = "black";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(720, 65, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = "black";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(700,70);
+        ctx.lineTo(700,80);
+        ctx.closePath();
+        ctx.stroke();
+
     </script>
 </body>
 </html>
