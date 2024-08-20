@@ -82,6 +82,19 @@
         ctx.font = "50px Arial";
         ctx.strokeText("Hola Canvas!", 700, 400);
 
+        //Unidad 2 Practica 7
+        var grd = ctx.createLinearGradient(0, 300, 400, 500);
+        grd.addColorStop(0.1, "red");
+        grd.addColorStop(0.6, "white");
+        grd.addColorStop(1, "green");
+
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 300, 150, 350);
+
+        ctx.strokeStyle="black";
+        ctx.fillText("Mèxico!", 150, 450);
+        ctx.strokeText("Mèxico!", 150, 450);
+
     </script>
 </body>
 </html>
