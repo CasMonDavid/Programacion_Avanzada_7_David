@@ -6,21 +6,22 @@
     <title>Practica 9</title>
 </head>
 <body>
+    <p><button id="dibujar" onclick="draw()">Dibuja</button></p>
+    <img id="Arthur" src="Arthur_imagen.png" alt="Arthur Morgan" width="20%" height="20%">
+
     <canvas id="myCanvas" width="1080" height="880"></canvas>
     <script>
         const c = document.getElementById("myCanvas");
         const ctx = c.getContext("2d");
 
+        //Marca el limite del lienzo
         ctx.strokeStyle = "black"
         ctx.strokeRect(0, 0, 1080, 880);
-
-        var img = new Image();
         
-        img.addEventListener("load", () => {
-            ctx.drawImage(img, 20, 20);
-        })
-        
-        img.src = "Arthur_imagen.png";
+        function draw() {
+            const img = document.getElementById("Arthur");
+            ctx.drawImage(img, 10, 10);
+        }
     </script>
 </body>
 </html>
