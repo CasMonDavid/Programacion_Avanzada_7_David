@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica 16</title>
+</head>
+<body>
+
+    <canvas id="myCanvas" width="1080" height="880"></canvas>
+    <script>
+        const c = document.getElementById("myCanvas");
+        const ctx = c.getContext("2d");
+
+        var isDrawing = false;
+
+        //Marca el limite del lienzo
+        ctx.strokeStyle = "black"
+        ctx.strokeRect(0, 0, 1080, 880);
+
+        c.addEventListener("mousedown", (e) => {
+            isDrawing = true;
+        });
+
+        c.addEventListener("mouseup", (e) => {
+            isDrawing = false;
+        });
+        
+        c.addEventListener("mousemove", (e) => {
+            if (isDrawing){
+                draw(e.offsetX, e.offsetY)
+            }
+        });
+
+        function draw(x, y) {
+            ctx.fillStyle = "black";
+            ctx.fillRect(x, y, 4, 4);
+        };
+        
+    </script>
+</body>
+</html>
