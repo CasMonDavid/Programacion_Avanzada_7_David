@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practica 26-27</title>
+    <title>Practica 26-27-28</title>
 </head>
 <body>
     <canvas id="myCanvas" width="1080" height="880"></canvas>
@@ -12,6 +12,7 @@
         const ctx = c.getContext("2d");
 
         var direction = "";
+        var speed = 10;
 
         function getRandomColor() {
             var letters = '0123456789ABCDEF';
@@ -26,6 +27,7 @@
         var y = Math.floor(Math.random() * 1000);
 
         document.addEventListener('keydown', (e) => {
+            console.log(e.keyCode);
             
             switch(e.keyCode){
                 case 38:
@@ -40,31 +42,34 @@
                 case 39:
                     direction = "right";
                     break;
+                case 32:
+                    speed += 5;
+                    break;
             }
         });
 
         function update(){
             switch(direction){
                 case "up":
-                    y -= 10;
+                    y -= speed;
                     if (y < -20){
                         y = 900;
                     }
                     break;
                 case "down":
-                    y += 10;
+                    y += speed;
                     if (y > 900){
                         y = -20;
                     }
                     break;
                 case "left":
-                    x -= 10;
+                    x -= speed;
                     if (x < -20){
                         x = 1100;
                     }
                     break;
                 case "right":
-                    x += 10;
+                    x += speed;
                     if (x > 1100){
                         x = -20;
                     }
@@ -82,6 +87,10 @@
 
             ctx.fillStyle = getRandomColor();
             ctx.fillRect(x, y, 40, 40);
+
+            ctx.fillStyle = "black";
+            ctx.font = "30px Papyrus";
+            ctx.fillText("Velocidad: "+speed, 10, 40);
 
             update();
             requestAnimationFrame(dibujar);
