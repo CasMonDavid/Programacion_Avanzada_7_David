@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practica 26</title>
+    <title>Practica 26-27</title>
 </head>
 <body>
     <canvas id="myCanvas" width="1080" height="880"></canvas>
@@ -47,15 +47,27 @@
             switch(direction){
                 case "up":
                     y -= 10;
+                    if (y < -20){
+                        y = 900;
+                    }
                     break;
                 case "down":
                     y += 10;
+                    if (y > 900){
+                        y = -20;
+                    }
                     break;
                 case "left":
                     x -= 10;
+                    if (x < -20){
+                        x = 1100;
+                    }
                     break;
                 case "right":
                     x += 10;
+                    if (x > 1100){
+                        x = -20;
+                    }
                     break;
             }
         }
