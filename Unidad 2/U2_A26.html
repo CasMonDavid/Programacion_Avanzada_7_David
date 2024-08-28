@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica 26</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="1080" height="880"></canvas>
+    <script>
+        const c = document.getElementById("myCanvas");
+        const ctx = c.getContext("2d");
+
+        var direction = "";
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        
+        var x = Math.floor(Math.random() * 1000);
+        var y = Math.floor(Math.random() * 1000);
+
+        document.addEventListener('keydown', (e) => {
+            
+            switch(e.keyCode){
+                case 38:
+                    direction = "up";
+                    break;
+                case 40:
+                    direction = "down";
+                    break;
+                case 37:
+                    direction = "left";
+                    break;
+                case 39:
+                    direction = "right";
+                    break;
+            }
+        });
+
+        function update(){
+            switch(direction){
+                case "up":
+                    y -= 10;
+                    break;
+                case "down":
+                    y += 10;
+                    break;
+                case "left":
+                    x -= 10;
+                    break;
+                case "right":
+                    x += 10;
+                    break;
+            }
+        }
+
+        function dibujar(){
+            //Marca el limite del lienzo
+            ctx.strokeStyle = "black"
+            ctx.strokeRect(0, 0, 1080, 880);
+
+            ctx.fillStyle = "white";
+            ctx.fillRect(1, 1, 1078, 878);
+
+            ctx.fillStyle = getRandomColor();
+            ctx.fillRect(x, y, 40, 40);
+
+            update();
+            requestAnimationFrame(dibujar);
+        };
+
+        requestAnimationFrame(dibujar);
+    </script>
+</body>
+</html>
