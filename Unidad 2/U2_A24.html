@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 24</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="436" height="323"></canvas>
+    <script>
+        const c = document.getElementById("myCanvas");
+        const ctx = c.getContext("2d");
+
+        var cudrado = 20;
+        var distanciaTierraClaraX = 0;
+        var distanciaTierraOscuraX = 21;
+        var distanciaTierraY = 246;
+
+        //Fondo azul y limite del lienzo
+        ctx.fillStyle = "#2000A0"
+        ctx.fillRect(0, 0, 436, 323);
+
+        //Sombra de cudrados
+        ctx.fillStyle = "#8C3F00"
+        ctx.fillRect(0, 253, 436, 200);
+
+        //CUADRITOS DE TIERRA
+        for (var o = 1; o < 12; o++){
+            for (var i = 1; i < 12; i++){
+                ctx.fillStyle = (o%2)>0 ? "#C06000" : "#602000" ;
+                ctx.fillRect(distanciaTierraClaraX, distanciaTierraY, cudrado, cudrado);
+                distanciaTierraClaraX += ((cudrado*2)+2);
+
+                ctx.fillStyle = (o%2)===0 ? "#C06000" : "#602000" ;
+                ctx.fillRect(distanciaTierraOscuraX, distanciaTierraY, cudrado, cudrado);
+                distanciaTierraOscuraX += ((cudrado*2)+2);
+            };
+            distanciaTierraClaraX = 0;
+            distanciaTierraOscuraX = 21;
+            distanciaTierraY += (cudrado+2);
+        };
+
+        //PASTO
+        ctx.fillStyle = "#80E000";
+        ctx.fillRect(0, 233, 436, 10)
+
+        ctx.fillStyle = "#40A000";
+        ctx.fillRect(0, 243, 436, 10)
+
+        ctx.fillStyle = "#006000";
+        ctx.fillRect(0, 253, 436, 9)
+
+        //SOMBRA DEL PASTO
+        ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+        ctx.fillRect(0, 262, 436, 17);
+
+        //AROS DE SONIC
+        ctx.beginPath();
+        ctx.strokeStyle = "#FEFE01";
+        ctx.arc(56, 208, 13, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(116, 208, 13, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(175, 208, 13, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        //TALLO FLOR
+        ctx.fillStyle = "#40A000";
+        ctx.fillRect(390, 198, 4, 35);
+
+        //PETALOS DE FLOR
+        ctx.fillStyle = "#E0E000";
+        ctx.beginPath();
+        ctx.moveTo(391,153);
+        ctx.lineTo(394,157);
+        ctx.lineTo(398,153);
+        ctx.lineTo(398,156);
+        ctx.lineTo(401,156);
+        ctx.lineTo(400,160);
+        ctx.lineTo(406,157);
+        ctx.lineTo(408,160);
+        ctx.lineTo(406,164);
+        ctx.lineTo(414,166);
+        ctx.lineTo(409,171);
+        ctx.lineTo(415,174);
+        ctx.lineTo(416,177);
+        ctx.lineTo(411,182);
+        ctx.lineTo(413,184);
+        ctx.lineTo(409,183);
+        ctx.lineTo(413,191);
+        ctx.lineTo(405,193);
+        ctx.lineTo(406,196);
+        ctx.lineTo(405,198);
+        ctx.lineTo(403,200);
+        ctx.lineTo(400,200);
+        ctx.lineTo(398,198);
+        ctx.lineTo(396,199);
+        ctx.lineTo(392,200);
+        ctx.lineTo(389,200);
+        ctx.lineTo(387,198);
+        ctx.lineTo(381,199);
+        ctx.lineTo(380,194);
+        ctx.lineTo(376,194);
+        ctx.lineTo(377,192);
+        ctx.lineTo(372,190);
+        ctx.lineTo(373,187);
+        ctx.lineTo(370,187);
+        ctx.lineTo(367,182);
+        ctx.lineTo(370,179);
+        ctx.lineTo(368,177);
+        ctx.lineTo(373,175);
+        ctx.lineTo(368,169);
+        ctx.lineTo(369,170);
+        ctx.lineTo(370,169);
+        ctx.lineTo(369,167);
+        ctx.lineTo(373,166);
+        ctx.lineTo(371,163);
+        ctx.lineTo(375,164);
+        ctx.lineTo(373,160);
+        ctx.lineTo(375,160);
+        ctx.lineTo(375,158);
+        ctx.lineTo(377,161);
+        ctx.lineTo(377,157);
+        ctx.lineTo(384,160);
+        ctx.lineTo(385,153);
+        ctx.lineTo(387,158);
+        ctx.closePath();
+        ctx.fill();
+
+        //CENTRO FLOR
+        ctx.beginPath();
+        ctx.fillStyle = "#406040";
+        ctx.arc(392, 176, 13, 0, 2 * Math.PI);
+        ctx.fill();
+
+        //TRONCO PALMERA
+        ctx.fillStyle = "#804000";
+        ctx.fillRect(271, 97, 10, 136);
+
+        //HOJAS DE PALMERA CENTRAL
+        ctx.fillStyle = "#80E000";
+        ctx.beginPath();
+        ctx.moveTo(273,61);
+        ctx.lineTo(265,50);
+        ctx.lineTo(250,43);
+        ctx.lineTo(231,42);
+        ctx.lineTo(233,44);
+        ctx.lineTo(230,45);
+        ctx.lineTo(242,47);
+        ctx.lineTo(234,49);
+        ctx.lineTo(225,47);
+        ctx.lineTo(207,47);
+        ctx.lineTo(173,60);
+        ctx.lineTo(171,63);
+        ctx.lineTo(176,71);
+        ctx.lineTo(182,67);
+        ctx.lineTo(181,73);
+        ctx.lineTo(185,69);
+        ctx.lineTo(186,75);
+        ctx.lineTo(192,72);
+        ctx.lineTo(197,73);
+        ctx.lineTo(202,68);
+        ctx.lineTo(204,72);
+        ctx.lineTo(209,65);
+        ctx.lineTo(211,73);
+        ctx.lineTo(219,69);
+        ctx.lineTo(223,73);
+        ctx.lineTo(226,66);
+        ctx.lineTo(227,75);
+        ctx.lineTo(231,67);
+        ctx.lineTo(230,76);
+        ctx.lineTo(234,74);
+        ctx.lineTo(233,79);
+        ctx.lineTo(238,72);
+        ctx.lineTo(237,81);
+        ctx.lineTo(243,72);
+        ctx.lineTo(245,80);
+        ctx.lineTo(249,68);
+        ctx.lineTo(252,77);
+        ctx.lineTo(255,67);
+        ctx.lineTo(260,74);
+        ctx.lineTo(261,64);
+        ctx.lineTo(266,67);
+        ctx.lineTo(266,62);
+        ctx.lineTo(269,67);
+        ctx.lineTo(266,71);
+        ctx.lineTo(240,82);
+        ctx.lineTo(231,88);
+        ctx.lineTo(240,85);
+        ctx.lineTo(235,90);
+        ctx.lineTo(245,86);
+        ctx.lineTo(235,95);
+        ctx.lineTo(246,88);
+        ctx.lineTo(238,96);
+        ctx.lineTo(248,90);
+        ctx.lineTo(240,98);
+        ctx.lineTo(246,94);
+        ctx.lineTo(240,102);
+        ctx.lineTo(251,96);
+        ctx.lineTo(247,101);
+        ctx.lineTo(251,99);
+        ctx.lineTo(248,104);
+        ctx.lineTo(254,114);
+        ctx.lineTo(256,100);
+        ctx.lineTo(263,104);
+        ctx.lineTo(270,96);
+        ctx.lineTo(280,107);
+        ctx.lineTo(280,120);
+        ctx.lineTo(296,108);
+        ctx.lineTo(284,126);
+        ctx.lineTo(298,118);
+        ctx.lineTo(292,129);
+        ctx.lineTo(300,126);
+        ctx.lineTo(299,128);
+        ctx.lineTo(304,126);
+        ctx.lineTo(303,129);
+        ctx.lineTo(308,126);
+        ctx.lineTo(308,129);
+        ctx.lineTo(315,137);
+        ctx.lineTo(319,140);
+        ctx.lineTo(321,139);
+        ctx.lineTo(316,128);
+        ctx.lineTo(320,128);
+        ctx.lineTo(315,123);
+        ctx.lineTo(322,127);
+        ctx.lineTo(315,120);
+        ctx.lineTo(321,122);
+        ctx.lineTo(311,113);
+        ctx.lineTo(325,116);
+        ctx.lineTo(313,108);
+        ctx.lineTo(318,109);
+        ctx.lineTo(293,90);
+        ctx.lineTo(297,78);
+        ctx.lineTo(300,81);
+        ctx.lineTo(302,77);
+        ctx.lineTo(323,89);
+        ctx.lineTo(307,69);
+        ctx.lineTo(322,79);
+        ctx.lineTo(318,70);
+        ctx.lineTo(326,76);
+        ctx.lineTo(321,68);
+        ctx.lineTo(332,77);
+        ctx.lineTo(326,69);
+        ctx.lineTo(336,77);
+        ctx.lineTo(332,71);
+        ctx.lineTo(337,75);
+        ctx.lineTo(331,66);
+        ctx.lineTo(343,74);
+        ctx.lineTo(342,68);
+        ctx.lineTo(347,71);
+        ctx.lineTo(351,67);
+        ctx.lineTo(363,72);
+        ctx.lineTo(363,66);
+        ctx.lineTo(369,69);
+        ctx.lineTo(365,64);
+        ctx.lineTo(356,60);
+        ctx.lineTo(344,54);
+        ctx.lineTo(333,53);
+        ctx.lineTo(334,49);
+        ctx.lineTo(340,53);
+        ctx.lineTo(341,49);
+        ctx.lineTo(345,53);
+        ctx.lineTo(345,47);
+        ctx.lineTo(353,56);
+        ctx.lineTo(352,48);
+        ctx.lineTo(358,55);
+        ctx.lineTo(355,44);
+        ctx.lineTo(362,54);
+        ctx.lineTo(359,40);
+        ctx.lineTo(364,55);
+        ctx.lineTo(367,58);
+        ctx.lineTo(371,48);
+        ctx.lineTo(376,60);
+        ctx.lineTo(377,49);
+        ctx.lineTo(380,58);
+        ctx.lineTo(383,49);
+        ctx.lineTo(391,55);
+        ctx.lineTo(386,48);
+        ctx.lineTo(390,48);
+        ctx.lineTo(380,40);
+        ctx.lineTo(366,32);
+        ctx.lineTo(349,30);
+        ctx.lineTo(333,33);
+        ctx.lineTo(327,26);
+        ctx.lineTo(322,25);
+        ctx.lineTo(327,22);
+        ctx.lineTo(321,23);
+        ctx.lineTo(313,23);
+        ctx.lineTo(318,13);
+        ctx.lineTo(311,23);
+        ctx.lineTo(306,23);
+        ctx.lineTo(309,17);
+        ctx.lineTo(305,22);
+        ctx.lineTo(298,24);
+        ctx.lineTo(291,34);
+        ctx.lineTo(285,43);
+        ctx.lineTo(285,33);
+        ctx.lineTo(283,23);
+        ctx.lineTo(277,21);
+        ctx.lineTo(273,20);
+        ctx.lineTo(271,28);
+        ctx.lineTo(272,33);
+        ctx.lineTo(273,42);
+        ctx.lineTo(267,36);
+        ctx.lineTo(262,34);
+        ctx.lineTo(262,40);
+        ctx.lineTo(263,46);
+        ctx.closePath();
+        ctx.fill();
+
+        //HOJAS DE PALMERA LATERAL IZQUIERDA
+        var restarX = 300;
+        ctx.fillStyle = "#80E000";
+        ctx.beginPath();
+        ctx.moveTo(273-restarX,61);
+        ctx.lineTo(265-restarX,50);
+        ctx.lineTo(250-restarX,43);
+        ctx.lineTo(231-restarX,42);
+        ctx.lineTo(233-restarX,44);
+        ctx.lineTo(230-restarX,45);
+        ctx.lineTo(242-restarX,47);
+        ctx.lineTo(234-restarX,49);
+        ctx.lineTo(225-restarX,47);
+        ctx.lineTo(207-restarX,47);
+        ctx.lineTo(173-restarX,60);
+        ctx.lineTo(171-restarX,63);
+        ctx.lineTo(176-restarX,71);
+        ctx.lineTo(182-restarX,67);
+        ctx.lineTo(181-restarX,73);
+        ctx.lineTo(185-restarX,69);
+        ctx.lineTo(186-restarX,75);
+        ctx.lineTo(192-restarX,72);
+        ctx.lineTo(197-restarX,73);
+        ctx.lineTo(202-restarX,68);
+        ctx.lineTo(204-restarX,72);
+        ctx.lineTo(209-restarX,65);
+        ctx.lineTo(211-restarX,73);
+        ctx.lineTo(219-restarX,69);
+        ctx.lineTo(223-restarX,73);
+        ctx.lineTo(226-restarX,66);
+        ctx.lineTo(227-restarX,75);
+        ctx.lineTo(231-restarX,67);
+        ctx.lineTo(230-restarX,76);
+        ctx.lineTo(234-restarX,74);
+        ctx.lineTo(233-restarX,79);
+        ctx.lineTo(238-restarX,72);
+        ctx.lineTo(237-restarX,81);
+        ctx.lineTo(243-restarX,72);
+        ctx.lineTo(245-restarX,80);
+        ctx.lineTo(249-restarX,68);
+        ctx.lineTo(252-restarX,77);
+        ctx.lineTo(255-restarX,67);
+        ctx.lineTo(260-restarX,74);
+        ctx.lineTo(261-restarX,64);
+        ctx.lineTo(266-restarX,67);
+        ctx.lineTo(266-restarX,62);
+        ctx.lineTo(269-restarX,67);
+        ctx.lineTo(266-restarX,71);
+        ctx.lineTo(240-restarX,82);
+        ctx.lineTo(231-restarX,88);
+        ctx.lineTo(240-restarX,85);
+        ctx.lineTo(235-restarX,90);
+        ctx.lineTo(245-restarX,86);
+        ctx.lineTo(235-restarX,95);
+        ctx.lineTo(246-restarX,88);
+        ctx.lineTo(238-restarX,96);
+        ctx.lineTo(248-restarX,90);
+        ctx.lineTo(240-restarX,98);
+        ctx.lineTo(246-restarX,94);
+        ctx.lineTo(240-restarX,102);
+        ctx.lineTo(251-restarX,96);
+        ctx.lineTo(247-restarX,101);
+        ctx.lineTo(251-restarX,99);
+        ctx.lineTo(248-restarX,104);
+        ctx.lineTo(254-restarX,114);
+        ctx.lineTo(256-restarX,100);
+        ctx.lineTo(263-restarX,104);
+        ctx.lineTo(270-restarX,96);
+        ctx.lineTo(280-restarX,107);
+        ctx.lineTo(280-restarX,120);
+        ctx.lineTo(296-restarX,108);
+        ctx.lineTo(284-restarX,126);
+        ctx.lineTo(298-restarX,118);
+        ctx.lineTo(292-restarX,129);
+        ctx.lineTo(300-restarX,126);
+        ctx.lineTo(299-restarX,128);
+        ctx.lineTo(304-restarX,126);
+        ctx.lineTo(303-restarX,129);
+        ctx.lineTo(308-restarX,126);
+        ctx.lineTo(308-restarX,129);
+        ctx.lineTo(315-restarX,137);
+        ctx.lineTo(319-restarX,140);
+        ctx.lineTo(321-restarX,139);
+        ctx.lineTo(316-restarX,128);
+        ctx.lineTo(320-restarX,128);
+        ctx.lineTo(315-restarX,123);
+        ctx.lineTo(322-restarX,127);
+        ctx.lineTo(315-restarX,120);
+        ctx.lineTo(321-restarX,122);
+        ctx.lineTo(311-restarX,113);
+        ctx.lineTo(325-restarX,116);
+        ctx.lineTo(313-restarX,108);
+        ctx.lineTo(318-restarX,109);
+        ctx.lineTo(293-restarX,90);
+        ctx.lineTo(297-restarX,78);
+        ctx.lineTo(300-restarX,81);
+        ctx.lineTo(302-restarX,77);
+        ctx.lineTo(323-restarX,89);
+        ctx.lineTo(307-restarX,69);
+        ctx.lineTo(322-restarX,79);
+        ctx.lineTo(318-restarX,70);
+        ctx.lineTo(326-restarX,76);
+        ctx.lineTo(321-restarX,68);
+        ctx.lineTo(332-restarX,77);
+        ctx.lineTo(326-restarX,69);
+        ctx.lineTo(336-restarX,77);
+        ctx.lineTo(332-restarX,71);
+        ctx.lineTo(337-restarX,75);
+        ctx.lineTo(331-restarX,66);
+        ctx.lineTo(343-restarX,74);
+        ctx.lineTo(342-restarX,68);
+        ctx.lineTo(347-restarX,71);
+        ctx.lineTo(351-restarX,67);
+        ctx.lineTo(363-restarX,72);
+        ctx.lineTo(363-restarX,66);
+        ctx.lineTo(369-restarX,69);
+        ctx.lineTo(365-restarX,64);
+        ctx.lineTo(356-restarX,60);
+        ctx.lineTo(344-restarX,54);
+        ctx.lineTo(333-restarX,53);
+        ctx.lineTo(334-restarX,49);
+        ctx.lineTo(340-restarX,53);
+        ctx.lineTo(341-restarX,49);
+        ctx.lineTo(345-restarX,53);
+        ctx.lineTo(345-restarX,47);
+        ctx.lineTo(353-restarX,56);
+        ctx.lineTo(352-restarX,48);
+        ctx.lineTo(358-restarX,55);
+        ctx.lineTo(355-restarX,44);
+        ctx.lineTo(362-restarX,54);
+        ctx.lineTo(359-restarX,40);
+        ctx.lineTo(364-restarX,55);
+        ctx.lineTo(367-restarX,58);
+        ctx.lineTo(371-restarX,48);
+        ctx.lineTo(376-restarX,60);
+        ctx.lineTo(377-restarX,49);
+        ctx.lineTo(380-restarX,58);
+        ctx.lineTo(383-restarX,49);
+        ctx.lineTo(391-restarX,55);
+        ctx.lineTo(386-restarX,48);
+        ctx.lineTo(390-restarX,48);
+        ctx.lineTo(380-restarX,40);
+        ctx.lineTo(366-restarX,32);
+        ctx.lineTo(349-restarX,30);
+        ctx.lineTo(333-restarX,33);
+        ctx.lineTo(327-restarX,26);
+        ctx.lineTo(322-restarX,25);
+        ctx.lineTo(327-restarX,22);
+        ctx.lineTo(321-restarX,23);
+        ctx.lineTo(313-restarX,23);
+        ctx.lineTo(318-restarX,13);
+        ctx.lineTo(311-restarX,23);
+        ctx.lineTo(306-restarX,23);
+        ctx.lineTo(309-restarX,17);
+        ctx.lineTo(305-restarX,22);
+        ctx.lineTo(298-restarX,24);
+        ctx.lineTo(291-restarX,34);
+        ctx.lineTo(285-restarX,43);
+        ctx.lineTo(285-restarX,33);
+        ctx.lineTo(283-restarX,23);
+        ctx.lineTo(277-restarX,21);
+        ctx.lineTo(273-restarX,20);
+        ctx.lineTo(271-restarX,28);
+        ctx.lineTo(272-restarX,33);
+        ctx.lineTo(273-restarX,42);
+        ctx.lineTo(267-restarX,36);
+        ctx.lineTo(262-restarX,34);
+        ctx.lineTo(262-restarX,40);
+        ctx.lineTo(263-restarX,46);
+        ctx.closePath();
+        ctx.fill();
+
+    </script>
+</body>
+</html>
