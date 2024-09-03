@@ -3,9 +3,514 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividad 25</title>
+    <title>Actividad 23</title>
 </head>
 <body>
-    
+    <canvas id="myCanvas" width="634" height="357"></canvas>
+    <script>
+        const c = document.getElementById("myCanvas");
+        const ctx = c.getContext("2d");
+
+        var distancias = [6,6];
+        var distanciaPatronX = 15;
+
+        //FONDO MAPA
+        ctx.fillStyle = "#B3EEFE"
+        ctx.fillRect(0, 0, 634, 357);
+
+        //TOP PLATAFORMA
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(0, 320, 634, 14);
+        ctx.lineWidth = 1;
+        ctx.fillStyle = "#FDC6C3";
+        ctx.fillRect(0, 320, 634, 14);
+
+        //PATRON DE LA PLATAFORMA
+        ctx.fillStyle = "#FDC6C3";
+        ctx.fillRect(0, 335, 634, 5);
+        ctx.fillStyle = "#F19677";
+        ctx.fillRect(0, 340, 634, 17);
+
+        ctx.beginPath();
+        ctx.moveTo(0-distanciaPatronX,335);
+        ctx.lineTo(4-distanciaPatronX,340);
+        ctx.lineTo(9-distanciaPatronX,340);
+        ctx.lineTo(5-distanciaPatronX,335);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.fillStyle = "black";
+        ctx.beginPath();
+        ctx.moveTo(4-distanciaPatronX,340);
+        ctx.lineTo(4-distanciaPatronX,343);
+        ctx.lineTo(7-distanciaPatronX,347);
+        ctx.lineTo(12-distanciaPatronX,349);
+        ctx.lineTo(16-distanciaPatronX,352);
+        ctx.lineTo(20-distanciaPatronX,352);
+        ctx.lineTo(20-distanciaPatronX,355);
+        ctx.lineTo(25-distanciaPatronX,357);
+        ctx.lineTo(30-distanciaPatronX,357);
+        ctx.lineTo(28-distanciaPatronX,352);
+        ctx.lineTo(24-distanciaPatronX,350);
+        ctx.lineTo(18-distanciaPatronX,348);
+        ctx.lineTo(13-distanciaPatronX,345);
+        ctx.lineTo(9-distanciaPatronX,343);
+        ctx.lineTo(9-distanciaPatronX,340);
+        ctx.closePath();
+        ctx.fill();
+
+        for (var i = 0; i < 43; i++) {
+            ctx.fillStyle = "#F19677";
+            ctx.beginPath();
+            ctx.moveTo(0+(distanciaPatronX*i),335);
+            ctx.lineTo(4+(distanciaPatronX*i),340);
+            ctx.lineTo(9+(distanciaPatronX*i),340);
+            ctx.lineTo(5+(distanciaPatronX*i),335);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.moveTo(4+(distanciaPatronX*i),340);
+            ctx.lineTo(4+(distanciaPatronX*i),343);
+            ctx.lineTo(7+(distanciaPatronX*i),347);
+            ctx.lineTo(12+(distanciaPatronX*i),349);
+            ctx.lineTo(16+(distanciaPatronX*i),352);
+            ctx.lineTo(20+(distanciaPatronX*i),352);
+            ctx.lineTo(20+(distanciaPatronX*i),355);
+            ctx.lineTo(25+(distanciaPatronX*i),357);
+            ctx.lineTo(30+(distanciaPatronX*i),357);
+            ctx.lineTo(28+(distanciaPatronX*i),352);
+            ctx.lineTo(24+(distanciaPatronX*i),350);
+            ctx.lineTo(18+(distanciaPatronX*i),348);
+            ctx.lineTo(13+(distanciaPatronX*i),345);
+            ctx.lineTo(9+(distanciaPatronX*i),343);
+            ctx.lineTo(9+(distanciaPatronX*i),340);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        //ARBUSTO
+        ctx.fillStyle = "#48CC69";
+        ctx.beginPath();
+        ctx.moveTo(22,320);
+        ctx.lineTo(55,320);
+        ctx.lineTo(58,316);
+        ctx.lineTo(57,305);
+        ctx.lineTo(54,300);
+        ctx.lineTo(51,291);
+        ctx.lineTo(46,283);
+        ctx.lineTo(41,280);
+        ctx.lineTo(32,280);
+        ctx.lineTo(27,288);
+        ctx.lineTo(25,299);
+        ctx.lineTo(22,300);
+        ctx.lineTo(22,307);
+        ctx.lineTo(18,304);
+        ctx.lineTo(18,317);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ///CUADRADO VACIO UNO
+        ctx.fillStyle = "#FD9163";
+        ctx.fillRect(19, 161, 35, 35);
+        ctx.lineWidth = 2;
+        ctx.strokeRect(19, 161, 35, 35);
+        ctx.lineWidth = 1;
+
+        ctx.beginPath();
+        ctx.arc(25, 166, 2, 0, 2 * Math.PI);
+        ctx.fillStyle = "black";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(47, 166, 2, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(25, 190, 2, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(47, 190, 2, 0, 2 * Math.PI);
+        ctx.fill();
+
+        //CUADRADO CON INTERROGACIÓN UNO
+        ctx.fillStyle = "#FD9163";
+        ctx.fillRect(100, 43, 35, 35);
+
+        ctx.lineWidth = 2;
+        ctx.font = "30px Bernard MT";
+        ctx.strokeText("?", 128, 73);
+        ctx.lineWidth = 1;
+
+        ctx.fillStyle = "#F6CEC2";
+        ctx.fillText("?", 128, 72);
+
+        ctx.lineWidth = 2;
+        ctx.font = "30px Bernard MT";
+        ctx.strokeText("?", 95, 73);
+        ctx.lineWidth = 1;
+
+        ctx.fillStyle = "#F6CEC2";
+        ctx.fillText("?", 95, 72);
+
+        ctx.lineWidth = 2;
+        ctx.strokeRect(100, 43, 35, 35);
+        ctx.lineWidth = 1;
+
+        ctx.fillStyle = "#B3EEFE";
+        ctx.fillRect(89, 42, 10, 40);
+
+        ///CUADRADO VACIO DOS
+        ctx.fillStyle = "#FD9163";
+        ctx.fillRect(136, 43, 35, 35);
+        ctx.lineWidth = 2;
+        ctx.strokeRect(136, 43, 35, 35);
+        ctx.lineWidth = 1;
+
+        ctx.beginPath();
+        ctx.arc(142, 48, 2, 0, 2 * Math.PI);
+        ctx.fillStyle = "black";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(165, 48, 2, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(142, 73, 2, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(165, 73, 2, 0, 2 * Math.PI);
+        ctx.fill();
+
+        //CUADRADO CON INTERROGACIÓN DOS
+        ctx.fillStyle = "#FD9163";
+        ctx.fillRect(580, 82, 35, 35);
+
+        ctx.lineWidth = 2;
+        ctx.font = "30px Bernard MT";
+        ctx.strokeText("?", 608, 110);
+        ctx.lineWidth = 1;
+
+        ctx.fillStyle = "#F6CEC2";
+        ctx.fillText("?", 608, 110);
+
+        ctx.lineWidth = 2;
+        ctx.font = "30px Bernard MT";
+        ctx.strokeText("?", 576, 110);
+        ctx.lineWidth = 1;
+
+        ctx.fillStyle = "#F6CEC2";
+        ctx.fillText("?", 576, 110);
+
+        ctx.lineWidth = 2;
+        ctx.strokeRect(580, 82, 35, 35);
+        ctx.lineWidth = 1;
+
+        ctx.fillStyle = "#B3EEFE";
+        ctx.fillRect(569, 82, 10, 40);
+        ctx.fillStyle = "#B3EEFE";
+        ctx.fillRect(616, 82, 10, 40);
+
+        //CUDRADO AZUL SOMBRA
+        ctx.fillStyle = "black";
+        ctx.fillRect(244, 140, 116, 179);
+
+        //CUDRADO AZUL
+        ctx.fillStyle = "#84C0FF";
+        ctx.fillRect(222, 123, 116, 196);
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(222, 123, 116, 196);
+        //boton izquierda superior
+        ctx.beginPath();
+        ctx.arc(232, 132, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#D9EAFA";
+        ctx.fill();
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(229,136);
+        ctx.lineTo(234,128);
+        ctx.closePath();
+        ctx.stroke();
+        //boton derecha superior
+        ctx.beginPath();
+        ctx.arc(327, 132, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#D9EAFA";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(324,135);
+        ctx.lineTo(330,129);
+        ctx.closePath();
+        ctx.stroke();
+
+        //CUDRADO NARANJA SOMBRA
+        ctx.fillStyle = "black";
+        ctx.fillRect(157, 222, 116, 97);
+
+        //CUDRADO NARANJA
+        ctx.fillStyle = "#FFC3B8";
+        ctx.fillRect(141, 202, 116, 117);
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(141, 202, 116, 117);
+        //boton izquierda superior
+        ctx.beginPath();
+        ctx.arc(151, 212, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#D9EAFA";
+        ctx.fill();
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(148,215);
+        ctx.lineTo(148+distancias[0],215-distancias[1]);
+        ctx.closePath();
+        ctx.stroke();
+        //boton derecha superior
+        ctx.beginPath();
+        ctx.arc(246, 212, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#D9EAFA";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(243,215);
+        ctx.lineTo(243+distancias[0],215-distancias[1]);
+        ctx.closePath();
+        ctx.stroke();
+        //boton derecha inferior
+        ctx.beginPath();
+        ctx.arc(246, 307, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#D9EAFA";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(243,310);
+        ctx.lineTo(243+distancias[0],310-distancias[1]);
+        ctx.closePath();
+        ctx.stroke();
+        //boton izquierda inferior
+        ctx.beginPath();
+        ctx.arc(151, 307, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#D9EAFA";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(148,310);
+        ctx.lineTo(148+distancias[0],310-distancias[1]);
+        ctx.closePath();
+        ctx.stroke();
+
+        //CUDRADO VERDE
+        ctx.fillStyle = "#51D86F";
+        ctx.fillRect(541, 202, 116, 117);
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(541, 202, 116, 117);
+        //boton izquierda superior
+        ctx.beginPath();
+        ctx.arc(552, 212, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#D9EAFA";
+        ctx.fill();
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(549,215);
+        ctx.lineTo(549+distancias[0],215-distancias[1]);
+        ctx.closePath();
+        ctx.stroke();
+        //boton izquierda inferior
+        ctx.beginPath();
+        ctx.arc(552, 307, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#D9EAFA";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(549,310);
+        ctx.lineTo(549+distancias[0],310-distancias[1]);
+        ctx.closePath();
+        ctx.stroke();
+
+        //MARIO//////////////////
+        //cuerpo
+        ctx.beginPath();
+        ctx.arc(340, 298, 12, 0, 2 * Math.PI);
+        ctx.fillStyle = "black";
+        ctx.fill();
+        //gorra
+        ctx.fillStyle = "#D44C32"; //rojo mario
+        ctx.beginPath();
+        ctx.moveTo(326,275);
+        ctx.lineTo(331,275);
+        ctx.lineTo(332,266);
+        ctx.lineTo(335,264);
+        ctx.lineTo(339,264);
+        ctx.lineTo(339,262);
+        ctx.lineTo(346,263);
+        ctx.lineTo(346,258);
+        ctx.lineTo(337,258);
+        ctx.lineTo(332,260);
+        ctx.lineTo(330,263);
+        ctx.lineTo(326,265);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        //cara
+        ctx.fillStyle = "#EABAB0"; //piel mario
+        ctx.beginPath();
+        ctx.moveTo(324,273);
+        ctx.lineTo(324,279);
+        ctx.lineTo(327,281);
+        ctx.lineTo(331,282);
+        ctx.lineTo(332,285);
+        ctx.lineTo(334,287);
+        ctx.lineTo(346,287);
+        ctx.lineTo(346,286);
+        ctx.lineTo(354,279);
+        ctx.lineTo(354,275);
+        ctx.lineTo(346,275);
+        ctx.lineTo(346,267);
+        ctx.lineTo(337,267);
+        ctx.lineTo(337,271);
+        ctx.lineTo(334,271);
+        ctx.lineTo(334,273);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        //cabello
+        ctx.fillStyle = "black";
+        ctx.beginPath();
+        ctx.moveTo(333,279);
+        ctx.lineTo(333,278);
+        ctx.lineTo(336,278);
+        ctx.lineTo(336,275);
+        ctx.lineTo(333,275);
+        ctx.lineTo(333,270);
+        ctx.lineTo(336,270);
+        ctx.lineTo(336,266);
+        ctx.lineTo(349,266);
+        ctx.lineTo(347,264);
+        ctx.lineTo(335,265);
+        ctx.lineTo(332,268);
+        ctx.lineTo(330,272);
+        ctx.lineTo(325,272);
+        ctx.lineTo(325,275);
+        ctx.lineTo(330,275);
+        ctx.lineTo(330,278);
+        ctx.lineTo(331,279);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        //ojo
+        ctx.beginPath();
+        ctx.arc(342, 272, 2, 0, 2 * Math.PI);
+        ctx.fillStyle = "black";
+        ctx.fill();
+        //mano
+        ctx.beginPath();
+        ctx.arc(343, 294, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = "#EABAB0";
+        ctx.fill();
+        //brazo
+        ctx.fillStyle = "#D44C32";
+        ctx.beginPath();
+        ctx.moveTo(332,288);
+        ctx.lineTo(330,291);
+        ctx.lineTo(330,295);
+        ctx.lineTo(332,298);
+        ctx.lineTo(335,299);
+        ctx.lineTo(335,302);
+        ctx.lineTo(343,302);
+        ctx.lineTo(343,297);
+        ctx.lineTo(340,297);
+        ctx.lineTo(339,291);
+        ctx.lineTo(338,289);
+        ctx.lineTo(336,288);
+        ctx.closePath();
+        ctx.fill();
+        //cinto
+        ctx.fillStyle = "white";
+        ctx.fillRect(349, 299, 3, 4);
+        ctx.fillRect(344, 300, 3, 2);
+        //zapato
+        ctx.fillStyle = "#D44C32";
+        ctx.fillRect(336, 309, 7, 10);
+        ctx.fillRect(336, 315, 13, 5);
+        //bigote
+        ctx.fillStyle = "black";
+        ctx.beginPath();
+        ctx.moveTo(337,281);
+        ctx.lineTo(341,282);
+        ctx.lineTo(341,285);
+        ctx.lineTo(347,285);
+        ctx.lineTo(352,282);
+        ctx.lineTo(345,282);
+        ctx.lineTo(345,280);
+        ctx.lineTo(342,280);
+        ctx.lineTo(340,278);
+        ctx.lineTo(339,280);
+        ctx.closePath();
+        ctx.fill();
+
+        //BOLA DE FUEGO
+        ctx.beginPath();
+        ctx.arc(380, 214, 11, 0, 2 * Math.PI);
+        ctx.fillStyle = "#B34F6B";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(380, 214, 7, 0, 2 * Math.PI);
+        ctx.fillStyle = "#EDF6D9";
+        ctx.fill();
+
+        //TUBO
+        //superior
+        ctx.fillStyle = "#1B8612";
+        ctx.fillRect(421, 203, 76, 34);
+        ctx.strokeRect(421, 203, 76, 34);
+        //inferior
+        ctx.fillStyle = "#1B8612";
+        ctx.fillRect(424, 238, 71, 81);
+        ctx.strokeRect(424, 238, 70, 81);
+
+        //FLOR
+        //tallo
+        ctx.fillStyle = "#60CE6D";
+        ctx.fillRect(456, 163, 5, 39);
+        //hojas
+        ctx.beginPath();
+        ctx.arc(452, 177, 7, 0, 1 * Math.PI);
+        ctx.fillStyle = "#60CE6D";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(466, 177, 7, 0, 1 * Math.PI);
+        ctx.fillStyle = "#60CE6D";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(452, 192, 7, 0, 1 * Math.PI);
+        ctx.fillStyle = "#60CE6D";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(466, 192, 7, 0, 1 * Math.PI);
+        ctx.fillStyle = "#60CE6D";
+        ctx.fill();
+        //capullo
+        ctx.beginPath();
+        ctx.arc(459, 152, 15, 0, 2 * Math.PI);
+        ctx.fillStyle = "#CD4835";
+        ctx.fill();
+
+    </script>
 </body>
 </html>
