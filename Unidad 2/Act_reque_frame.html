@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practica 26-27-28</title>
+    <title>Actividades request frame</title>
 </head>
 <body>
     <canvas id="myCanvas" width="1080" height="880"></canvas>
@@ -11,8 +11,32 @@
         const c = document.getElementById("myCanvas");
         const ctx = c.getContext("2d");
 
+        class Rectangulo {
+            constructor(x,y,w,h,c,s) {
+              this.x = x;
+              this.y = y;
+              this.w = w;
+              this.h = h;
+              this.c = c;
+              this.s = s;
+            }
+
+            estaTocando(objetivo){
+                if (this.x < objetivo.x + objetivo.w && 
+                    this.x + this.w > objetivo.x   &&
+                    this.y < objetivo.y + objetivo.h && 
+                    this.y + this.h > objetivo.y) {
+                    return true;
+                }
+                return false;
+            };
+
+          }
+
+        const player = new Rectangulo(450,200,40,40,getRandomColor(),10);
+        const target = new Rectangulo(100,100,20,20,getRandomColor(),0);
+
         var direction = "";
-        var speed = 10;
 
         function getRandomColor() {
             var letters = '0123456789ABCDEF';
@@ -23,8 +47,8 @@
             return color;
         }
         
-        var x = Math.floor(Math.random() * 1000);
-        var y = Math.floor(Math.random() * 1000);
+        var x_random = Math.floor(Math.random() * 1000);
+        var y_random = Math.floor(Math.random() * 800);
 
         document.addEventListener('keydown', (e) => {
             
@@ -42,7 +66,7 @@
                     direction = "right";
                     break;
                 case 32:
-                    speed += 5;
+                    player.s += 5;
                     break;
             }
         });
@@ -50,29 +74,35 @@
         function update(){
             switch(direction){
                 case "up":
-                    y -= speed;
-                    if (y < -20){
-                        y = 900;
+                    player.y -= player.s;
+                    if (player.y < -20){
+                        player.y = 900;
                     }
                     break;
                 case "down":
-                    y += speed;
-                    if (y > 900){
-                        y = -20;
+                    player.y += player.s;
+                    if (player.y > 900){
+                        player.y = -20;
                     }
                     break;
                 case "left":
-                    x -= speed;
-                    if (x < -20){
-                        x = 1100;
+                    player.x -= player.s;
+                    if (player.x < -20){
+                        player.x = 1100;
                     }
                     break;
                 case "right":
-                    x += speed;
-                    if (x > 1100){
-                        x = -20;
+                    player.x += player.s;
+                    if (player.x > 1100){
+                        player.x = -20;
                     }
                     break;
+            }
+
+            if (player.estaTocando(target)){
+                target.x = Math.floor(Math.random() * 1000);
+                target.y = Math.floor(Math.random() * 800);
+                target.c = getRandomColor();
             }
         }
 
@@ -84,12 +114,17 @@
             ctx.fillStyle = "white";
             ctx.fillRect(1, 1, 1078, 878);
 
-            ctx.fillStyle = getRandomColor();
-            ctx.fillRect(x, y, 40, 40);
+            //jugador
+            ctx.fillStyle = player.c;
+            ctx.fillRect(player.x, player.y, player.w, player.h);
+
+            //objetivo
+            ctx.fillStyle = target.c;
+            ctx.fillRect(target.x, target.y, target.w, target.h);
 
             ctx.fillStyle = "black";
             ctx.font = "30px Papyrus";
-            ctx.fillText("Velocidad: "+speed, 10, 40);
+            ctx.fillText("Velocidad: "+player.s, 10, 40);
 
             update();
             requestAnimationFrame(dibujar);
