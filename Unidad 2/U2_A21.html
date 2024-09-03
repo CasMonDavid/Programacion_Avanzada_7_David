@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 21</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="501" height="501"></canvas>
+    <script>
+        const c = document.getElementById("myCanvas");
+        const ctx = c.getContext("2d");
+
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(0, 0, 501, 501);
+
+        c.addEventListener("mousedown", (e) => {
+            console.log(e.offsetX+", "+e.offsetY);
+        });
+
+        /*ctx.fillStyle = "#D2691E";
+        ctx.fillRect(115, 240, 15, 60);
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(115, 240, 15, 65);*/
+
+        ctx.beginPath();
+        ctx.fillStyle = "#FFA07A";
+        ctx.arc(250, 250, 100, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "black";
+        ctx.arc(250, 260, 35, 0, 1 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "black";
+        ctx.arc(226, 240, 4, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "black";
+        ctx.arc(275, 240, 4, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.fillStyle = "#FFA07A";
+        ctx.fillRect(235, 345, 30, 20);
+
+        ctx.fillStyle = "#FFA07A";
+        ctx.strokeStyle = "black";
+        ctx.beginPath();
+        ctx.moveTo(368,358);
+        ctx.lineTo(410,330);
+        ctx.lineTo(421,341);
+        ctx.lineTo(367,370);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.fillStyle = "#FFA07A";
+        ctx.strokeStyle = "black";
+        ctx.beginPath();
+        ctx.moveTo(121,365);
+        ctx.lineTo(50,386);
+        ctx.lineTo(57,395);
+        ctx.lineTo(120,375);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.fillStyle = "#C71585";
+        ctx.strokeStyle = "black";
+        ctx.beginPath();
+        ctx.moveTo(150,359);
+        ctx.lineTo(250,363);
+        ctx.lineTo(372,355);
+        ctx.lineTo(370,373);
+        ctx.lineTo(327,385);
+        ctx.lineTo(325,500);
+        ctx.lineTo(171,500);
+        ctx.lineTo(154,384);
+        ctx.lineTo(118,379);
+        ctx.lineTo(115,362);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#FFA07A";
+        ctx.arc(57, 390, 15, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#FFA07A";
+        ctx.arc(411, 337, 15, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(151, 239);
+        ctx.bezierCurveTo(171, 275, 250, 193, 250, 150);
+        ctx.fillStyle = "#000000";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(153, 239);
+        ctx.bezierCurveTo(115, 197, 250, 105, 250, 150);
+        ctx.fillStyle = "#000000";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(250, 150);
+        ctx.bezierCurveTo(249, 181, 321, 254, 350, 246);
+        ctx.fillStyle = "#000000";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(250, 150);
+        ctx.bezierCurveTo(275, 125, 375, 205, 348, 245);
+        ctx.fillStyle = "#000000";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(228, 153);
+        ctx.bezierCurveTo(228, 171, 273, 179, 269, 156);
+        ctx.fillStyle = "#000000";
+        ctx.fill();
+
+        ctx.fillStyle = "#black";
+        ctx.strokeStyle = "black";
+        ctx.beginPath();
+        ctx.moveTo(224,355);
+        ctx.lineTo(249,365);
+        ctx.lineTo(220,372);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(249,365);
+        ctx.lineTo(276,355);
+        ctx.lineTo(272,370);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#8B0000";
+        ctx.arc(250, 370, 3, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = "#8B0000";
+        ctx.arc(250, 380, 3, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = "#8B0000";
+        ctx.arc(250, 390, 3, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = "#8B0000";
+        ctx.arc(250, 400, 3, 0, 2 * Math.PI);
+        ctx.fill();
+
+    </script>
+</body>
+</html>
