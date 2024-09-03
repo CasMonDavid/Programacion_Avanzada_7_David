@@ -35,6 +35,7 @@
 
         const player = new Rectangulo(450,200,40,40,getRandomColor(),10);
         const target = new Rectangulo(100,100,20,20,getRandomColor(),0);
+        const wall = new Rectangulo(300,700,500,70,getRandomColor(),0);
 
         var direction = "";
 
@@ -104,6 +105,23 @@
                 target.y = Math.floor(Math.random() * 800);
                 target.c = getRandomColor();
             }
+
+            if (player.estaTocando(wall)){
+                switch(direction){
+                    case "up":
+                        player.y += player.s;
+                        break;
+                    case "down":
+                        player.y -= player.s;
+                        break;
+                    case "left":
+                        player.x += player.s;
+                        break;
+                    case "right":
+                        player.x -= player.s;
+                        break;
+                }
+            }
         }
 
         function dibujar(){
@@ -121,6 +139,11 @@
             //objetivo
             ctx.fillStyle = target.c;
             ctx.fillRect(target.x, target.y, target.w, target.h);
+
+            //muro
+            ctx.fillStyle = wall.c;
+            ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
+            ctx.strokeRect(wall.x, wall.y, wall.w, wall.h);
 
             ctx.fillStyle = "black";
             ctx.font = "30px Papyrus";
