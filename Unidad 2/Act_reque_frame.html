@@ -40,6 +40,10 @@
         var score = 0;
         var pause = false;
 
+        const image = new Image(40,40);
+
+        image.src = "pacman.png";
+
         walls.push(new Rectangulo(300,700,500,70,getRandomColor(),0));
         walls.push(new Rectangulo(200,100,700,70,getRandomColor(),0));
 
@@ -56,8 +60,13 @@
         var y_random = Math.floor(Math.random() * 800);
 
         document.addEventListener('keydown', (e) => {
-            
-            switch(e.keyCode){
+
+            if (pause){
+                if (e.keyCode == 32){
+                    pause = !pause;
+                }
+            }else{
+                switch(e.keyCode){
                 case 38:
                     direction = "up";
                     break;
@@ -73,6 +82,7 @@
                 case 32:
                     pause = !pause;
                     break;
+            }
             }
         });
 
@@ -155,7 +165,7 @@
 
             //jugador
             ctx.fillStyle = player.c;
-            ctx.fillRect(player.x, player.y, player.w, player.h);
+            ctx.drawImage(image, player.x, player.y, player.w, player.h);
 
             //objetivo
             ctx.fillStyle = target.c;
