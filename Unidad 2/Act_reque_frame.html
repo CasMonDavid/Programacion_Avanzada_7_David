@@ -35,7 +35,10 @@
 
         const player = new Rectangulo(450,200,40,40,getRandomColor(),10);
         const target = new Rectangulo(100,100,20,20,getRandomColor(),0);
-        const wall = new Rectangulo(300,700,500,70,getRandomColor(),0);
+        var walls = [];
+
+        walls.push(new Rectangulo(300,700,500,70,getRandomColor(),0));
+        walls.push(new Rectangulo(200,100,700,70,getRandomColor(),0));
 
         var direction = "";
 
@@ -106,7 +109,8 @@
                 target.c = getRandomColor();
             }
 
-            if (player.estaTocando(wall)){
+            walls.forEach(wall => {
+                if (player.estaTocando(wall)){
                 switch(direction){
                     case "up":
                         player.y += player.s;
@@ -122,6 +126,14 @@
                         break;
                 }
             }
+            if (target.estaTocando(wall)){
+                target.x = Math.floor(Math.random() * 1000);
+                target.y = Math.floor(Math.random() * 800);
+                target.c = getRandomColor();
+
+                console.log("El objetivo aparecio dentro de la pared");
+            }
+            });
         }
 
         function dibujar(){
@@ -140,10 +152,11 @@
             ctx.fillStyle = target.c;
             ctx.fillRect(target.x, target.y, target.w, target.h);
 
-            //muro
-            ctx.fillStyle = wall.c;
-            ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
-            ctx.strokeRect(wall.x, wall.y, wall.w, wall.h);
+            walls.forEach(wall =>{
+                ctx.fillStyle = wall.c;
+                ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
+                ctx.strokeRect(wall.x, wall.y, wall.w, wall.h);
+            });
 
             ctx.fillStyle = "black";
             ctx.font = "30px Papyrus";
