@@ -11,6 +11,8 @@
         const c = document.getElementById("myCanvas");
         const ctx = c.getContext("2d");
 
+        const audio = new Audio("mario-coin.mp3");
+
         class Rectangulo {
             constructor(x,y,w,h,c,s) {
               this.x = x;
@@ -124,6 +126,9 @@
                 target.y = Math.floor(Math.random() * 800);
                 target.c = getRandomColor();
 
+                audio.pause();
+                audio.play();
+
                 score += 5;
                 player.s += 2;
             }
@@ -150,7 +155,7 @@
                 target.y = Math.floor(Math.random() * 800);
                 target.c = getRandomColor();
 
-                console.log("El objetivo aparecio dentro de la pared");
+                //El objetivo aparecio dentro de la pared
             }
             });
         }
