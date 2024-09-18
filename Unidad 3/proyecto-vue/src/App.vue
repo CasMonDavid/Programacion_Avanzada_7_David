@@ -6,27 +6,27 @@
   let resultado = ref(0)
   let texto = ref('')
 
-  function Sumar(){
-    resultado.value = Number(varUno.value)+Number(varDos.value)
-  }
+  methods: {
 
-  defineProps({
-    varUno: Number,
-    varDos: Number,
-    resultado: Number
-  })
+  }
 </script>
 
 <template>
   <div class="cuerpo">
-    <input class="m-i" v-model="texto" placeholder="Escribe tu nombre">
-    <h3 class="m-i">Hola: {{ texto }}</h3>
-    <button class="m-i" @click="count++">Haz oprimido este botón {{ count }} veces!!</button>
-    <h3 class="m-i">Coloca 2 numeros y realiza una suma:</h3>
-    <input class="suma" v-model="varUno" placeholder="Valor 1">
-    <input class="suma" v-model="varDos" placeholder="valor 2">
-    <button class="m-i" v-on:click="Sumar()"> S U M A R </button>
-    <h4>{{ varUno }} + {{ varDos }} = {{ resultado }}</h4>
+    <div id="titulo">
+        <h1>Iniciar sesión</h1>
+    </div>
+    <div id="campos">
+      <div id="campoCorreo">
+        <label for="">Ingresar correo: </label>
+        <input v-model="correo" type="text" placeholder="Correo">
+      </div>
+      <div id="campoPassword">
+        <label for="">Ingresar contraseña: </label>
+        <input v-model="password" type="password" placeholder="Contraseña">
+      </div>
+      <button>Acceder</button>
+    </div>
   </div>
 </template>
 
@@ -35,20 +35,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: burlywood;
   }
-  input {
-    width: 40%;
-    height: 25px;
-  }
-  button {
-    background-color: aliceblue;
-    color: black;
+  #titulo h1{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
   }
-  .m-i{
-    margin-bottom: 10px;
+  #campos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px;
+    padding: 20px;
   }
-  .suma {
-    width: 200px;
+  #campoCorreo{
+    padding-bottom: 10px;
+  }
+  #campoPassword{
+    padding-bottom: 10px;
   }
 </style>
