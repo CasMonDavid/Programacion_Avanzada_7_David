@@ -1,0 +1,83 @@
+//Colores
+@colorButton: #2874a6;
+@colorButtonHover: #1a5276;
+@colorCrema: #fadbd8;
+@listaColoresLI: #e67e22, #bb8fce, #d98880, #82e0aa;
+//Medidas
+@inputHeight: 25px;
+@fontSize: 20px;
+//Padding
+@paddingSuave: 5px;
+@paddingFuerte: 15px;
+//Margin
+@marginSuave: 5px;
+@marginFuerte: 15px;
+@fuente: Helvetica;
+
+.bordes-s-r{
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+body{
+    background-color: antiquewhite;
+    font-family: @fuente;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: @colorCrema;
+}
+
+form > div{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-self: center;
+    .bordes-s-r;
+    margin: @marginFuerte;
+    padding: @paddingFuerte;
+}
+
+label{
+    font-size: @fontSize;
+}
+
+input{
+    height: @inputHeight;
+    font-size: @fontSize;
+}
+
+li{
+    font-size: @fontSize;
+}
+
+button{
+    background-color: @colorButton;
+    font-size: @fontSize;
+    width: 200px;
+    height: 40px;
+    color: white;
+    font-weight: 900;
+    &:hover{
+        background-color: @colorButtonHover;
+    }
+}
+
+a{
+    padding: @paddingSuave;
+    margin: @marginSuave;
+}
+//funciones
+each(@listaColoresLI, {
+    .li-@{index} {  
+        color: @value;
+        background-color: black;
+        .bordes-s-r;
+        &:hover{
+            color: white
+        }
+    }
+});

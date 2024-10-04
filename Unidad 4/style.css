@@ -1,0 +1,85 @@
+.bordes-s-r {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+body {
+  background-color: antiquewhite;
+  font-family: Helvetica;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fadbd8;
+}
+form > div {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-self: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 15px;
+  padding: 15px;
+}
+label {
+  font-size: 20px;
+}
+input {
+  height: 25px;
+  font-size: 20px;
+}
+li {
+  font-size: 20px;
+}
+button {
+  background-color: #2874a6;
+  font-size: 20px;
+  width: 200px;
+  height: 40px;
+  color: white;
+  font-weight: 900;
+}
+button:hover {
+  background-color: #1a5276;
+}
+a {
+  padding: 5px;
+  margin: 5px;
+}
+.li-1 {
+  color: #e67e22;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.li-1:hover {
+  color: white;
+}
+.li-2 {
+  color: #bb8fce;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.li-2:hover {
+  color: white;
+}
+.li-3 {
+  color: #d98880;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.li-3:hover {
+  color: white;
+}
+.li-4 {
+  color: #82e0aa;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.li-4:hover {
+  color: white;
+}
