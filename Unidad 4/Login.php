@@ -32,6 +32,7 @@
                               <label class="form-check-label" for="exampleCheck1">Terminos y condiciones</label>
                             </div>
                             <button type="submit" name="action" class="btn btn-primary">Acceder</button>
+                            <input type="hidden" name="action" value="access">
                         </form>
                     </div>
                 </div>
