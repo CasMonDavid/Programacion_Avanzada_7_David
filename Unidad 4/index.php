@@ -2,12 +2,15 @@
 	session_start();
 
 	if (isset($_SESSION['user_id']) && $_SESSION['user_id']!=null) {
-		
-		
-		
+        $productController = new ProductController();
+        $productos = $productController->getAllProducts()
+        if ($productos==null){
+            echo "Valio";
+        }else{
+            echo $productController;
+        }
 	}else{
-
-		header('Location: index.php');
+		header('Location: login.php');
 	}
 ?>
 <!DOCTYPE html>
