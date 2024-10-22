@@ -5,7 +5,7 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     //IMPORTAR
-    require_once('App/ProductController.php');
+    require('App/ProductController.php');
 
 	if (isset($_SESSION['user_id']) && $_SESSION['user_id']!=null) {
         $productController = new ProductController();
@@ -200,18 +200,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form>
+            <form method="POST" action="App/ProductController.php">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" name="nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Slug</label>
+                    <input type="text" class="form-control" name="slug" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Descripción</label>
-                    <textarea class="form-control"></textarea>
+                    <textarea class="form-control" name="descripcion" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Caracteristicas</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="caracteristicas" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Imagen</label>
@@ -234,6 +238,7 @@
                     <input type="number" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Añadir nuevo producto</button>
+                <input type="hidden" name="action" value="create_product">
             </form>
             </div>
             <div class="modal-footer">
