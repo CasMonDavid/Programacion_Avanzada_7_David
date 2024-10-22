@@ -1,3 +1,28 @@
+<?php
+    session_start();
+    //MUESTRA LOS ERRORES DE PHP
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+    //IMPORTAR
+    require_once('App/ProductController.php');
+
+    if (isset($_SESSION["user_id"]) && $_SESSION['user_id']!=null) {
+        if (isset($_GET['slug'])) {
+            $productController = new ProductController();
+            $producto = $productController->getProduct($_GET['slug']);
+            if ($producto){
+                //var_dump($producto);
+            }else{
+                echo "ERROR, llego vacio. ".$producto;
+            }
+        } else {
+            echo'Algo salio mal con el link';
+        }
+    }else{
+        header("Location: login.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,7 +106,7 @@
                     <div class="row">
                         <div class="card col-12">
                             <div class="card-header">
-                                <h3>Detalles del producto X</h3>
+                                <h3>Detalles del producto</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -94,13 +119,13 @@
                                             </div>
                                             <div class="carousel-inner">
                                                 <div class="carousel-item active">
-                                                    <img src="https://ui-avatars.com/api/?size=150&name=México" class="d-block w-100" alt="...">
+                                                    <img src=<?= $producto->cover ?> class="d-block w-100" alt="...">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="https://ui-avatars.com/api/?size=150&name=Canada" class="d-block w-100" alt="...">
+                                                    <img src=<?= $producto->cover ?> class="d-block w-100" alt="...">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="https://ui-avatars.com/api/?size=150&name=España" class="d-block w-100" alt="...">
+                                                    <img src=<?= $producto->cover ?> class="d-block w-100" alt="...">
                                             </div>
                                             </div>
                                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -114,47 +139,32 @@
                                         </div>
                                     </div>
                                     <div class="col-9 card-body">
-                                        <h3>Viajar a X</h3>
-                                        <h4>$999,999,999 MXN</h4>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur alias accusantium ut ipsa quo impedit hic nobis officia?
-                                            Molestias sit harum soluta, tempore repellendus aspernatur officia totam voluptatem rem! Eaque Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic at facilis architecto,
-                                            quod nesciunt totam eum eligendi ducimus cupiditate aliquid perspiciatis odio. Error facere perspiciatis autem vitae consectetur architecto non.
-                                        </p>
-                                        <button class="btn btn-success">Viajar!</button>
+                                        <h3><?= $producto->name ?></h3>
+                                        <h4>$<?= $producto->presentations[0]->price[0]->amount ?> MXN</h4>
+                                        <p><?= $producto->description ?></p>
+                                        <button class="btn btn-lg btn-success">Comprar!</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <h3>Caracteristicas</h3>
+                            <h3>Presentaciones</h3>
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Almacen</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                    <?php foreach ($producto->presentations as $presentacion): ?>
+                                        <tr>
+                                            <td><?= $presentacion->description ?></td>
+                                            <td><?= $presentacion->status ?></td>
+                                            <td><?= $presentacion->stock ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>

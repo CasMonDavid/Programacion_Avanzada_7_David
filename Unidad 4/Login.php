@@ -13,7 +13,7 @@
             <div class="col-1"></div>
             <div class="col-md-10 bg-light border border-2 rounded">
                 <div class="row">
-                    <div class="col-md-6 d-none d-sm-none d-sm-none d-lg-block">
+                    <div class="col-md-6 d-none d-sm-none d-lg-block">
                         <img src="Viaje.jpg" class="img-thumbnail" alt="">
                     </div>
                     <div class="col-md-6">
