@@ -106,7 +106,7 @@
 
                 <div class="container-fluid justify-content-end">
                     <div class="col-1 m-2">
-                        <button type="button" class="btn btn-lg btn-outline-dark">Añadir</button>
+                        <button type="button" class="btn btn-lg btn-outline-dark" data-bs-toggle="modal" data-bs-target="#agregar">Añadir</button>
                     </div>
                 </div> 
 
@@ -127,14 +127,141 @@
                                     </div>
                                     <hr>
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-warning">Editar</button>
-                                        <button type="button" class="btn btn-danger">Eliminar</button>
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
                                     </div>
                                 </div>
                             </div>  
                         <?php endforeach; ?>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar -->
+    <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Descripción</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Caracteristicas</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Imagen</label>
+                    <input type="url" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Añadir categoria</label>
+                    <input type="tel" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Añadir presentación</label>
+                    <input type="tel" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Modificar el estado</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Modificar el almacenamiento</label>
+                    <input type="number" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal agregar -->
+    <div class="modal modal-lg fade" id="agregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar un nuevo producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Descripción</label>
+                    <textarea class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Caracteristicas</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Imagen</label>
+                    <input type="url" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Añadir categoria</label>
+                    <input type="tel" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Añadir presentación</label>
+                    <input type="tel" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Agregar un estado</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Agregar el almacenamiento</label>
+                    <input type="number" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Añadir nuevo producto</button>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Eliminar -->
+    <div class="modal modal-sm fade" id="eliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar un producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                    <label class="form-label">¿Esta seguro de eliminar este producto de la aplicación?</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
             </div>
         </div>
     </div>
