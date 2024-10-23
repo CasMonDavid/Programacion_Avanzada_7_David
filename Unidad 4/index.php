@@ -1,9 +1,9 @@
 <?php
 	session_start();
     //MUESTRA LOS ERRORES DE PHP
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    //ini_set('display_errors', 1);
+    //ini_set('display_startup_errors', 1);
+    //error_reporting(E_ALL);
     //IMPORTAR
     require('App/ProductController.php');
 
@@ -113,7 +113,7 @@
                 <div class="bg-white m-4">
                     <div class="row">
                         <?php foreach ($productos as $producto): ?>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" style="max-height:700px">
                                 <div class="card">
                                     <?php if ($producto->cover!=null): ?>
                                         <img src=<?= $producto->cover ?> class="card-img-top img-fluid" alt="...">
@@ -127,7 +127,7 @@
                                     </div>
                                     <hr>
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
+                                        <button onclick="obtenerProductoEditar('<?= $producto->slug ?>')" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
                                     </div>
                                 </div>
@@ -148,18 +148,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form>
+            <form method="POST" action="App/ProductController.php">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input id="nombreEdit" type="text" class="form-control" name="nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Slug</label>
+                    <input id="slugEdit" type="text" class="form-control" name="slug" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Descripción</label>
-                    <input type="text" class="form-control">
+                    <textarea id="descripcionEdit" class="form-control" name="descripcion" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Caracteristicas</label>
-                    <input type="text" class="form-control">
+                    <input id="caracteristicasEdit" type="text" class="form-control" name="caracteristicas" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Imagen</label>
@@ -182,6 +186,7 @@
                     <input type="number" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <input type="hidden" name="action" value="update_product">
             </form>
             </div>
             <div class="modal-footer">
@@ -272,5 +277,34 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        function obtenerProductoEditar(slugProducto){
+            fetch('App/ProductController.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ action: 'edit', slug: slugProducto })
+            })
+            .then(response => response.text())
+            .then(text => {
+                try {
+                    //Intentar interpretar la respuesta como JSON
+                    const data = JSON.parse(text);
+                    console.log('Respuesta desde PHP:', data);
+                    document.getElementById('nombreEdit').value = data.nombre;
+                    document.getElementById('slugEdit').value = data.slug;
+                    document.getElementById('descripcionEdit').value = data.descripcion;
+                    document.getElementById('caracteristicasEdit').value = data.caracteristicas;
+                } catch (error) {
+                    // Si la respuesta no es un JSON válido
+                    console.error('Respuesta no es JSON:', text);
+                }
+            })
+            .catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+        }
+    </script>
 </body>
 </html>
