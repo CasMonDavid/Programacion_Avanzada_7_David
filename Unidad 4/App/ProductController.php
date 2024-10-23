@@ -1,13 +1,15 @@
 <?php
-session_start();
+    session_start();
+if (isset($_SESSION)){
+}
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$json = file_get_contents('php://input');
-$data = json_decode($json, true);
+//$json = file_get_contents('php://input');
+//$data = json_decode($json, true);
 
-if (isset($data['action'])){
+/*if (isset($data['action'])){
     switch ($data['action']){
         case 'create_product':
             $ProductController = new ProductController();
@@ -44,7 +46,7 @@ if (isset($data['action'])){
         default:
             break;
     }
-}
+}*/
 
 if (isset($_POST['action'])) {
     switch ($_POST['action']) {
@@ -61,6 +63,13 @@ if (isset($_POST['action'])) {
             echo $id.', '.$nombre.', '.$slug.', '.$descripcion.', '.$caracteristicas;
 
             $ProductController->update($id,$nombre,$slug,$descripcion,$caracteristicas);
+            break;
+        case 'delete_product':
+                $productController = new ProductController();
+
+                $id = $_POST['idProductDelete'];
+
+                $productController->delete($id);
             break;
         default:break;
     }
@@ -215,6 +224,41 @@ class ProductController
         $response = json_decode($response);
         
         if ($response) {
+            header('Location: ../index.php?status=ok');
+        }else{
+            //header('Location: ../index.php?status=error');
+        }
+
+    }
+
+    public function delete($id){
+        $dataUser = $_SESSION['user_data'];
+        $token = $dataUser->token;
+
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products/'.$id,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'DELETE',
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Bearer '.$token,
+        ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $response = json_decode($response);
+        
+        if (isset($response->code)) {
             header('Location: ../index.php?status=ok');
         }else{
             //header('Location: ../index.php?status=error');

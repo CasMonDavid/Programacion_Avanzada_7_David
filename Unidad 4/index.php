@@ -1,5 +1,5 @@
 <?php
-	session_start();
+    session_start();
     //MUESTRA LOS ERRORES DE PHP
     //ini_set('display_errors', 1);
     //ini_set('display_startup_errors', 1);
@@ -128,7 +128,7 @@
                                     <hr>
                                     <div class="card-body">
                                         <button onclick="obtenerProductoEditar('<?= $producto->slug ?>')" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
+                                        <button onclick="deleteProduct('<?= $producto->id ?>')" type="button" class="btn btn-danger">Eliminar</button>
                                     </div>
                                 </div>
                             </div>  
@@ -254,28 +254,14 @@
     </div>
 
     <!-- Modal Eliminar -->
-    <div class="modal modal-sm fade" id="eliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar un producto</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <form>
-                <div class="mb-3">
-                    <label class="form-label">¿Esta seguro de eliminar este producto de la aplicación?</label>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger">Eliminar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-            </div>
-        </div>
-    </div>
 
+    <!-- Form eliminar -->
+     <form id="deleteForm" method="POST" action="App/ProductController.php">
+        <input id="id_delete" type="hidden" name="idProductDelete">
+        <input type="hidden" name="action" value="delete_product">
+     </form>
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         function obtenerProductoEditar(slugProducto){
@@ -303,6 +289,26 @@
             })
             .catch(error => {
                 console.error('Error en la solicitud:', error);
+            });
+        }
+        function deleteProduct(id){
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! Your imaginary file has been deleted!", {
+                    icon: "success",
+                    });
+                    document.getElementById("id_delete").value = id;
+                    document.getElementById("deleteForm").submit();
+                } else {
+                    //no hace nada
+                }
             });
         }
     </script>
