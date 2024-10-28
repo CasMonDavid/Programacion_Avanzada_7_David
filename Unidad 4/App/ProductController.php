@@ -2,14 +2,14 @@
     session_start();
 if (isset($_SESSION)){
 }
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
-//$json = file_get_contents('php://input');
-//$data = json_decode($json, true);
+$json = file_get_contents('php://input');
+$data = json_decode($json, true);
 
-/*if (isset($data['action'])){
+if (isset($data['action'])){
     switch ($data['action']){
         case 'create_product':
             $ProductController = new ProductController();
@@ -41,12 +41,13 @@ error_reporting(E_ALL);
                                      'nombre' => $producto->name,
                                      'slug' => $producto->slug,
                                      'descripcion' => $producto->description,
-                                     'caracteristicas' => $producto->features]);
+                                     'caracteristicas' => $producto->features,
+                                     'brand' => $producto->brand]);
             break;
         default:
             break;
     }
-}*/
+}
 
 if (isset($_POST['action'])) {
     switch ($_POST['action']) {

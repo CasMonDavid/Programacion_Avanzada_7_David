@@ -6,14 +6,23 @@
     //error_reporting(E_ALL);
     //IMPORTAR
     require('App/ProductController.php');
+    require('App/BrandController.php');
 
 	if (isset($_SESSION['user_id']) && $_SESSION['user_id']!=null) {
         $productController = new ProductController();
         $productos = $productController->getAllProducts();
+
+        $brandController = new BrandController();
+        $marcas = $brandController->getAll();
+
         if ($productos){
-            //var_dump($productos);
+            if ($marcas){
+                //NO HACE NADA todo bien
+            }else{
+                echo "ERROR, llego vacio: Marcas";
+            }
         }else{
-            echo "ERROR, llego vacio: ".$productos;
+            echo "ERROR, llego vacio: Productos";
         }
 	}else{
 		header('Location: login.php');
@@ -166,6 +175,12 @@
                     <input id="caracteristicasEdit" type="text" class="form-control" name="caracteristicas" required>
                 </div>
                 <div class="mb-3">
+                    <label class="form-label" for="">Marcas</label>
+                    <select class="form-select" aria-label="Default select example" id="marcasEditar" name="marcasEditar" data-marcas="<?= htmlspecialchars(json_encode($marcas), ENT_QUOTES, "UTF-8");?>">
+                        <!-- option id="brandProductSelect" value="" selected></option -->
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Imagen</label>
                     <input type="url" class="form-control">
                 </div>
@@ -223,6 +238,15 @@
                     <input type="text" class="form-control" name="caracteristicas" required>
                 </div>
                 <div class="mb-3">
+                    <label class="form-label" for="">Marcas</label>
+                    <select class="form-select" aria-label="Default select example" id="marcas" name="marcas">
+                        <?php foreach ($marcas as $marca): ?>
+                            <option value="<?= $marca->slug ?>"><?= $marca->slug ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <!-- Campos por Añadir -->
+                <div class="mb-3">
                     <label class="form-label">Imagen</label>
                     <input type="url" class="form-control">
                 </div>
@@ -253,8 +277,6 @@
         </div>
     </div>
 
-    <!-- Modal Eliminar -->
-
     <!-- Form eliminar -->
      <form id="deleteForm" method="POST" action="App/ProductController.php">
         <input id="id_delete" type="hidden" name="idProductDelete">
@@ -265,6 +287,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         function obtenerProductoEditar(slugProducto){
+            let slugMarca = "";
             fetch('App/ProductController.php', {
                 method: 'POST',
                 headers: {
@@ -275,21 +298,44 @@
             .then(response => response.text())
             .then(text => {
                 try {
-                    //Intentar interpretar la respuesta como JSON
                     const data = JSON.parse(text);
-                    console.log('Respuesta desde PHP:', data);
                     document.getElementById('nombreEdit').value = data.nombre;
                     document.getElementById('slugEdit').value = data.slug;
                     document.getElementById('descripcionEdit').value = data.descripcion;
                     document.getElementById('caracteristicasEdit').value = data.caracteristicas;
+                    document.getElementById('brandProductSelect').value = data.brand.slug;
+                    document.getElementById('brandProductSelect').textContent = data.brand.name;
                 } catch (error) {
-                    // Si la respuesta no es un JSON válido
                     console.error('Respuesta no es JSON:', text);
+                    console.error(error)
                 }
             })
             .catch(error => {
                 console.error('Error en la solicitud:', error);
             });
+            let elSelect = document.querySelector("[data-marcas]");
+            let selectPadre = document.getElementById("marcasEditar")
+            let hijo = selectPadre.firstChild;
+
+            let marcasData = JSON.parse(elSelect.dataset.marcas);
+            if (marcasData!=null){
+                marcasData.forEach(marca => {
+                    let opcion = document.createElement("option");
+                    opcion.textContent = marca.name;
+                    opcion.value = marca.slug;
+
+                    if (slugMarca != null){
+                        console.log(slugMarca);
+                    }else{
+                        console.log("Slug llego vacio");
+                    }
+
+                    selectPadre.insertBefore(opcion, hijo);
+                });
+                elSelect.selectedIndex="0";
+            }else{
+                console.log("llego vacio las marcas al editar");
+            }
         }
         function deleteProduct(id){
             swal({
