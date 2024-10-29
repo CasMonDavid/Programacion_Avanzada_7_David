@@ -177,7 +177,7 @@
                 <div class="mb-3">
                     <label class="form-label" for="">Marcas</label>
                     <select class="form-select" aria-label="Default select example" id="marcasEditar" name="marcasEditar" data-marcas="<?= htmlspecialchars(json_encode($marcas), ENT_QUOTES, "UTF-8");?>">
-                        <!-- option id="brandProductSelect" value="" selected></option -->
+                        <option id="brandProductSelect" value="" selected></option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -287,7 +287,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         function obtenerProductoEditar(slugProducto){
-            let slugMarca = "";
             fetch('App/ProductController.php', {
                 method: 'POST',
                 headers: {
@@ -303,8 +302,8 @@
                     document.getElementById('slugEdit').value = data.slug;
                     document.getElementById('descripcionEdit').value = data.descripcion;
                     document.getElementById('caracteristicasEdit').value = data.caracteristicas;
-                    document.getElementById('brandProductSelect').value = data.brand.slug;
-                    document.getElementById('brandProductSelect').textContent = data.brand.name;
+
+                    fillOptionBrands(data.brand.slug);
                 } catch (error) {
                     console.error('Respuesta no es JSON:', text);
                     console.error(error)
@@ -313,6 +312,9 @@
             .catch(error => {
                 console.error('Error en la solicitud:', error);
             });
+        }
+
+        function fillOptionBrands(slugBrand){
             let elSelect = document.querySelector("[data-marcas]");
             let selectPadre = document.getElementById("marcasEditar")
             let hijo = selectPadre.firstChild;
@@ -320,23 +322,22 @@
             let marcasData = JSON.parse(elSelect.dataset.marcas);
             if (marcasData!=null){
                 marcasData.forEach(marca => {
+                    
                     let opcion = document.createElement("option");
                     opcion.textContent = marca.name;
                     opcion.value = marca.slug;
 
-                    if (slugMarca != null){
-                        console.log(slugMarca);
-                    }else{
-                        console.log("Slug llego vacio");
+                    if (slugBrand!=null && slugBrand === marca.slug){
+                        opcion.selected = true;
                     }
 
                     selectPadre.insertBefore(opcion, hijo);
                 });
-                elSelect.selectedIndex="0";
             }else{
                 console.log("llego vacio las marcas al editar");
             }
         }
+
         function deleteProduct(id){
             swal({
                 title: "Are you sure?",

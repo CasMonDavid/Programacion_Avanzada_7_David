@@ -23,7 +23,7 @@ class BrandController
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer 1138|QbPgY4OoAPjUVDaxGOQeEOLZTeH3T0MSCRyIbuIA'
+            'Authorization: Bearer '.$token,
         ),
         ));
 
