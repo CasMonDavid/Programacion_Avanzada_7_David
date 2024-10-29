@@ -11,17 +11,6 @@ $data = json_decode($json, true);
 
 if (isset($data['action'])){
     switch ($data['action']){
-        case 'create_product':
-            $ProductController = new ProductController();
-			
-			$nombre = $_POST['nombre'];
-			$slug = $_POST['slug'];
-            $descripcion = $_POST['descripcion'];
-			$caracteristicas = $_POST['caracteristicas'];
-
-            $ProductController->createProduct($nombre,$slug,$descripcion, $caracteristicas);
-
-            break;
         case 'update_product':
             $ProductController = new ProductController();
 			
@@ -51,6 +40,19 @@ if (isset($data['action'])){
 
 if (isset($_POST['action'])) {
     switch ($_POST['action']) {
+        case 'create_product':
+            $ProductController = new ProductController();
+			
+			$nombre = $_POST['nombre'];
+			$slug = $_POST['slug'];
+            $descripcion = $_POST['descripcion'];
+			$caracteristicas = $_POST['caracteristicas'];
+
+            echo'Hola entre a create_product';
+
+            $ProductController->createProduct($nombre,$slug,$descripcion, $caracteristicas);
+
+            break;
         case 'update_product':
             $ProductController = new ProductController();
 			
@@ -151,6 +153,15 @@ class ProductController
         $dataUser = $_SESSION['user_data'];
         $token = $dataUser->token;
 
+        $target_path = "uploads/";
+        $target_path = $target_path . basename( $_FILES['uploadedfile']['name']); 
+        if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
+            echo "El archivo ". $target_path . 
+            " ha sido subido";
+        } else{
+            echo "Ha ocurrido un error, trate de nuevo!";
+        }
+
         $curl = curl_init();
 
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
@@ -169,7 +180,8 @@ class ProductController
             'name' => $nombre,
             'slug' => $slug,
             'description' => $descripcion,
-            'features' => $caracteristicas),
+            'features' => $caracteristicas,
+            'cover'=> new CURLFILE($target_path)),
         CURLOPT_HTTPHEADER => array(
             'Authorization: Bearer '.$token,
         ),
@@ -180,9 +192,9 @@ class ProductController
         $response = json_decode($response);
         
         if ($response) {
-            header('Location: index.php?status=ok');
+            header('Location: ../index.php?status=ok');
         }else{
-            header('Location: index.php?status=error');
+           header('Location: ../index.php?status=error');
         }
 
     }
@@ -227,7 +239,7 @@ class ProductController
         if ($response) {
             header('Location: ../index.php?status=ok');
         }else{
-            //header('Location: ../index.php?status=error');
+            header('Location: ../index.php?status=error');
         }
 
     }

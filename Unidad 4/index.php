@@ -220,7 +220,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="App/ProductController.php">
+            <form method="POST" enctype="multipart/form-data" action="App/ProductController.php">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre</label>
                     <input type="text" class="form-control" name="nombre" required>
@@ -247,8 +247,8 @@
                 </div>
                 <!-- Campos por Añadir -->
                 <div class="mb-3">
-                    <label class="form-label">Imagen</label>
-                    <input type="url" class="form-control">
+                    <label for="formFile" class="form-label">Imagen</label>
+                    <input class="form-control" name="uploadedfile" type="file" id="formFile">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Añadir categoria</label>
