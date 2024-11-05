@@ -1,5 +1,8 @@
 <?php 
-session_start();
+include_once("config.php");
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 if (isset($_POST['action'])) {
 	switch ($_POST['action']) {
@@ -62,11 +65,10 @@ class Autentificacion
 			$_SESSION['user_data'] = $response->data;
 			$_SESSION['user_id'] = $response->data->id;
 
-			header('Location: ../index.php');
+			header('Location: '.BASE_PATH.'products/');
 
 		}else{
-
-			//header('Location: ' . $_SERVER['HTTP_REFERER']);
+			header('Location: '.BASE_PATH.'login/');
 			echo " |Fallo|";
 
 		}

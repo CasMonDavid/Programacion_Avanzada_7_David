@@ -1,363 +1,321 @@
-<?php
-    session_start();
-    //MUESTRA LOS ERRORES DE PHP
-    //ini_set('display_errors', 1);
-    //ini_set('display_startup_errors', 1);
-    //error_reporting(E_ALL);
-    //IMPORTAR
-    require('App/ProductController.php');
-    require('App/BrandController.php');
-
-	if (isset($_SESSION['user_id']) && $_SESSION['user_id']!=null) {
-        $productController = new ProductController();
-        $productos = $productController->getAllProducts();
-
-        $brandController = new BrandController();
-        $marcas = $brandController->getAll();
-
-        if ($productos){
-            if ($marcas){
-                //NO HACE NADA todo bien
-            }else{
-                echo "ERROR, llego vacio: Marcas";
-            }
-        }else{
-            echo "ERROR, llego vacio: Productos";
-        }
-	}else{
-		header('Location: login.php');
-	}
+<?php 
+  include_once "app/config.php";
+  include "App/Autentificacion.php";
 ?>
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body style="overflow-x:hidden;">
-    
-    <div class="container-fluid min-vh-100 d-flex flex-column p-0">
+  <head>
+    <title>Login | Light Able Admin & Dashboard Template</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Light Able admin and dashboard template offer a variety of UI elements and pages, ensuring your admin panel is both fast and effective."
+    />
+    <meta name="author" content="phoenixcoded" />
+    <link rel="icon" href="<?= BASE_PATH ?>assets/images/favicon.svg" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="<?= BASE_PATH ?>assets/fonts/phosphor/duotone/style.css" />
+    <link rel="stylesheet" href="<?= BASE_PATH ?>assets/fonts/tabler-icons.min.css" />
+    <link rel="stylesheet" href="<?= BASE_PATH ?>assets/fonts/feather.css" />
+    <link rel="stylesheet" href="<?= BASE_PATH ?>assets/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="<?= BASE_PATH ?>assets/fonts/material.css" />
+    <link rel="stylesheet" href="<?= BASE_PATH ?>assets/css/style.css" id="main-style-link" />
+    <link rel="stylesheet" href="<?= BASE_PATH ?>assets/css/style-preset.css" />
 
-        <div class="row flex-grow-1">
-            <div class="col-md-2 d-sm-12 d-lg-block d-flex flex-column p-3 flex-shrink-0 bg-light">
-                <div class="row">
-                    <div class="fixed-top col-md-2 d-sm-12 d-lg-block">
-                        <a href="" class="d-flex align-items-center link-dark text-decoration-none fs-4">
-                            <img src="centro-de-juegos-50.png" class="img-fluid" alt="">
-                            Tienda-E
-                        </a>
-                        <hr>
-                        <ul class="nav nav-pills flex-column mb-auto">
-                            <li class="nav-item">
-                                <a href="" class="nav-link link-dark">Menú</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link link-dark">Tendencia</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link link-dark">Categorías</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link link-dark">Historial</a>
-                            </li>
-                        </ul>
-                        <hr>
-                        <div class="btn-group dropup">
-                            <button type="button" class="btn btn-secondary dropdown-toggle fs-6 align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://ui-avatars.com/api/?size=30&name=Invitado" class="rounded-circle" alt="">
-                                Invitado
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Iniciar sesión</a></li>
-                                <li><a class="dropdown-item" href="#">Registrarse</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                
-            </div>
+  </head>
 
-            <div class="col-md-10 col-sm-12 p-0">
-
-                <nav class="navbar border rounded navbar-expand-lg">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">Tienda en línea</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Carrito</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Opciones
-                                </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Accesibilidad</a></li>
-                                        <li><a class="dropdown-item" href="#">Sucursales</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Preguntas frecuentes</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <form class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Computadoras" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Buscar</button>
-                            </form>
-                        </div>
-                    </div>
-                </nav>
-
-                <div class="container-fluid justify-content-end">
-                    <div class="col-1 m-2">
-                        <button type="button" class="btn btn-lg btn-outline-dark" data-bs-toggle="modal" data-bs-target="#agregar">Añadir</button>
-                    </div>
-                </div> 
-
-                <div class="bg-white m-4">
-                    <div class="row">
-                        <?php foreach ($productos as $producto): ?>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" style="max-height:700px">
-                                <div class="card">
-                                    <?php if ($producto->cover!=null): ?>
-                                        <img src=<?= $producto->cover ?> class="card-img-top img-fluid" alt="...">
-                                    <?php else: ?>
-                                        <img src="https://ui-avatars.com/api/?name=Producto&size=200&background=random" class="" alt="...">
-                                    <?php endif; ?>
-                                    <div class="card-body">
-                                        <h5 class="card-title"> <?= $producto->name ?> </h5>
-                                        <p class="card-text"> <?= $producto->description ?> </p>
-                                        <a href="detalles.php?slug=<?= $producto->slug ?>" class="btn btn-primary">Ver detalles</a>
-                                    </div>
-                                    <hr>
-                                    <div class="card-body">
-                                        <button onclick="obtenerProductoEditar('<?= $producto->slug ?>')" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
-                                        <button onclick="deleteProduct('<?= $producto->id ?>')" type="button" class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>  
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <body data-pc-preset="preset-1" data-pc-sidebar-theme="light" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">
+    <div class="loader-bg">
+      <div class="loader-track">
+        <div class="loader-fill"></div>
+      </div>
     </div>
 
-    <!-- Modal Editar -->
-    <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar producto</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="auth-main v2">
+      <div class="bg-overlay bg-dark"></div>
+      <div class="auth-wrapper">
+      <div class="auth-sidecontent">
+        <div class="auth-sidefooter">
+          <img src="<?= BASE_PATH ?>assets/images/logo-dark.svg" class="img-brand img-fluid" alt="images" />
+          <hr class="mb-3 mt-4" />
+          <div class="row">
+            <div class="col my-1">
+              <p class="m-0">Made with ♥ by Team <a href="https://themeforest.net/user/phoenixcoded" target="_blank"> Phoenixcoded</a></p>
             </div>
-            <div class="modal-body">
-            <form method="POST" action="App/ProductController.php">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                    <input id="nombreEdit" type="text" class="form-control" name="nombre" required>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Slug</label>
-                    <input id="slugEdit" type="text" class="form-control" name="slug" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Descripción</label>
-                    <textarea id="descripcionEdit" class="form-control" name="descripcion" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Caracteristicas</label>
-                    <input id="caracteristicasEdit" type="text" class="form-control" name="caracteristicas" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="">Marcas</label>
-                    <select class="form-select" aria-label="Default select example" id="marcasEditar" name="marcasEditar" data-marcas="<?= htmlspecialchars(json_encode($marcas), ENT_QUOTES, "UTF-8");?>">
-                        <option id="brandProductSelect" value="" selected></option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Imagen</label>
-                    <input type="url" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Añadir categoria</label>
-                    <input type="tel" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Añadir presentación</label>
-                    <input type="tel" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Modificar el estado</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Modificar el almacenamiento</label>
-                    <input type="number" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                <input type="hidden" name="action" value="update_product">
-            </form>
+            <div class="col-auto my-1">
+              <ul class="list-inline footer-link mb-0">
+                <li class="list-inline-item"><a href="../index.html">Home</a></li>
+                <li class="list-inline-item"><a href="https://pcoded.gitbook.io/light-able/" target="_blank">Documentation</a></li>
+                <li class="list-inline-item"><a href="https://phoenixcoded.support-hub.io/" target="_blank">Support</a></li>
+              </ul>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>  
+      </div>
+      <form method="POST" class="auth-form" action="<?= BASE_PATH ?>auth">
+        <div class="card my-5 mx-3">
+          <div class="card-body">
+            <h4 class="f-w-500 mb-1">Inicia sesión con tu correo</h4>
+            <p class="mb-3">¿No tienes una cuenta? <a href="register-v2.html" class="link-primary ms-1">Crear cuenta</a></p>
+            <div class="mb-3">
+              <input type="email" class="form-control" id="floatingInput" name="correo" placeholder="Correo" required/>
             </div>
+            <div class="mb-3">
+              <input type="password" class="form-control" id="floatingInput1" name="contrasenna" placeholder="Contraseña" required/>
             </div>
+            <div class="d-flex mt-1 justify-content-between align-items-center">
+              <div class="form-check">
+                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                <label class="form-check-label text-muted" for="customCheckc1">Remember me?</label>
+              </div>
+              <a href="forgot-password-v2.html">
+                <h6 class="text-secondary f-w-400 mb-0">¿Olvidó su contraseña?</h6>
+              </a>
+            </div>
+            <div class="d-grid mt-4">
+              <button type="submit" name="action" class="btn btn-primary">Acceder</button>
+              <input type="hidden" name="action" value="access">
+            </div>
+            <div class="saprator my-3">
+              <span>Or continue with</span>
+            </div>
+            <div class="text-center">
+              <ul class="list-inline mx-auto mt-3 mb-0">
+                <li class="list-inline-item">
+                  <a href="https://www.facebook.com/" class="avtar avtar-s rounded-circle bg-facebook" target="_blank">
+                    <i class="fab fa-facebook-f text-white"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="https://twitter.com/" class="avtar avtar-s rounded-circle bg-twitter" target="_blank">
+                    <i class="fab fa-twitter text-white"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="https://myaccount.google.com/" class="avtar avtar-s rounded-circle bg-googleplus" target="_blank">
+                    <i class="fab fa-google text-white"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </form>
     </div>
+  </div>
+    <!-- [ Main Content ] end -->
+    <!-- Required Js -->
+    <script src="<?= BASE_PATH ?>assets/js/plugins/popper.min.js"></script>
+    <script src="<?= BASE_PATH ?>assets/js/plugins/simplebar.min.js"></script>
+    <script src="<?= BASE_PATH ?>assets/js/plugins/bootstrap.min.js"></script>
+    <script src="<?= BASE_PATH ?>assets/js/fonts/custom-font.js"></script>
+    <script src="<?= BASE_PATH ?>assets/js/pcoded.js"></script>
+    <script src="<?= BASE_PATH ?>assets/js/plugins/feather.min.js"></script>
 
-    <!-- Modal agregar -->
-    <div class="modal modal-lg fade" id="agregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar un nuevo producto</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <form method="POST" enctype="multipart/form-data" action="App/ProductController.php">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" required>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Slug</label>
-                    <input type="text" class="form-control" name="slug" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Descripción</label>
-                    <textarea class="form-control" name="descripcion" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Caracteristicas</label>
-                    <input type="text" class="form-control" name="caracteristicas" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="">Marcas</label>
-                    <select class="form-select" aria-label="Default select example" id="marcas" name="marcas">
-                        <?php foreach ($marcas as $marca): ?>
-                            <option value="<?= $marca->slug ?>"><?= $marca->slug ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <!-- Campos por Añadir -->
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Imagen</label>
-                    <input class="form-control" name="uploadedfile" type="file" id="formFile">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Añadir categoria</label>
-                    <input type="tel" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Añadir presentación</label>
-                    <input type="tel" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Agregar un estado</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Agregar el almacenamiento</label>
-                    <input type="number" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-primary">Añadir nuevo producto</button>
-                <input type="hidden" name="action" value="create_product">
-            </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Form eliminar -->
-     <form id="deleteForm" method="POST" action="App/ProductController.php">
-        <input id="id_delete" type="hidden" name="idProductDelete">
-        <input type="hidden" name="action" value="delete_product">
-     </form>
-    
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+       
     <script>
-        function obtenerProductoEditar(slugProducto){
-            fetch('App/ProductController.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ action: 'edit', slug: slugProducto })
-            })
-            .then(response => response.text())
-            .then(text => {
-                try {
-                    const data = JSON.parse(text);
-                    document.getElementById('nombreEdit').value = data.nombre;
-                    document.getElementById('slugEdit').value = data.slug;
-                    document.getElementById('descripcionEdit').value = data.descripcion;
-                    document.getElementById('caracteristicasEdit').value = data.caracteristicas;
-
-                    fillOptionBrands(data.brand.slug);
-                } catch (error) {
-                    console.error('Respuesta no es JSON:', text);
-                    console.error(error)
-                }
-            })
-            .catch(error => {
-                console.error('Error en la solicitud:', error);
-            });
-        }
-
-        function fillOptionBrands(slugBrand){
-            let elSelect = document.querySelector("[data-marcas]");
-            let selectPadre = document.getElementById("marcasEditar")
-            let hijo = selectPadre.firstChild;
-
-            let marcasData = JSON.parse(elSelect.dataset.marcas);
-            if (marcasData!=null){
-                marcasData.forEach(marca => {
-                    
-                    let opcion = document.createElement("option");
-                    opcion.textContent = marca.name;
-                    opcion.value = marca.slug;
-
-                    if (slugBrand!=null && slugBrand === marca.slug){
-                        opcion.selected = true;
-                    }
-
-                    selectPadre.insertBefore(opcion, hijo);
-                });
-            }else{
-                console.log("llego vacio las marcas al editar");
-            }
-        }
-
-        function deleteProduct(id){
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this imaginary file!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                })
-                .then((willDelete) => {
-                if (willDelete) {
-                    swal("Poof! Your imaginary file has been deleted!", {
-                    icon: "success",
-                    });
-                    document.getElementById("id_delete").value = id;
-                    document.getElementById("deleteForm").submit();
-                } else {
-                    //no hace nada
-                }
-            });
-        }
+      layout_change('light');
     </script>
-</body>
+       
+    <script>
+      layout_sidebar_change('light');
+    </script>
+      
+    <script>
+      change_box_container('false');
+    </script>
+     
+    <script>
+      layout_caption_change('true');
+    </script>
+       
+    <script>
+      layout_rtl_change('false');
+    </script>
+     
+    <script>
+      preset_change('preset-1');
+    </script>
+    
+ <div class="offcanvas border-0 pct-offcanvas offcanvas-end" tabindex="-1" id="offcanvas_pc_layout">
+  <div class="offcanvas-header justify-content-between">
+    <h5 class="offcanvas-title">Settings</h5>
+    <button type="button" class="btn btn-icon btn-link-danger" data-bs-dismiss="offcanvas" aria-label="Close"
+      ><i class="ti ti-x"></i
+    ></button>
+  </div>
+  <div class="pct-body customizer-body">
+    <div class="offcanvas-body py-0">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="pc-dark">
+            <h6 class="mb-1">Theme Mode</h6>
+            <p class="text-muted text-sm">Choose light or dark mode or Auto</p>
+            <div class="row theme-color theme-layout">
+              <div class="col-4">
+                <div class="d-grid">
+                  <button class="preset-btn btn active" data-value="true" onclick="layout_change('light');">
+                    <span class="btn-label">Light</span>
+                    <span class="pc-lay-icon"><span></span><span></span><span></span><span></span></span>
+                  </button>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="d-grid">
+                  <button class="preset-btn btn" data-value="false" onclick="layout_change('dark');">
+                    <span class="btn-label">Dark</span>
+                    <span class="pc-lay-icon"><span></span><span></span><span></span><span></span></span>
+                  </button>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="d-grid">
+                  <button
+                    class="preset-btn btn"
+                    data-value="default"
+                    onclick="layout_change_default();"
+                    data-bs-toggle="tooltip"
+                    title="Automatically sets the theme based on user's operating system's color scheme."
+                  >
+                    <span class="btn-label">Default</span>
+                    <span class="pc-lay-icon d-flex align-items-center justify-content-center">
+                      <i class="ph-duotone ph-cpu"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <h6 class="mb-1">Sidebar Theme</h6>
+          <p class="text-muted text-sm">Choose Sidebar Theme</p>
+          <div class="row theme-color theme-sidebar-color">
+            <div class="col-6">
+              <div class="d-grid">
+                <button class="preset-btn btn" data-value="true" onclick="layout_sidebar_change('dark');">
+                  <span class="btn-label">Dark</span>
+                  <span class="pc-lay-icon"><span></span><span></span><span></span><span></span></span>
+                </button>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-grid">
+                <button class="preset-btn btn active" data-value="false" onclick="layout_sidebar_change('light');">
+                  <span class="btn-label">Light</span>
+                  <span class="pc-lay-icon"><span></span><span></span><span></span><span></span></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <h6 class="mb-1">Accent color</h6>
+          <p class="text-muted text-sm">Choose your primary theme color</p>
+          <div class="theme-color preset-color">
+            <a href="#!" class="active" data-value="preset-1"><i class="ti ti-check"></i></a>
+            <a href="#!" data-value="preset-2"><i class="ti ti-check"></i></a>
+            <a href="#!" data-value="preset-3"><i class="ti ti-check"></i></a>
+            <a href="#!" data-value="preset-4"><i class="ti ti-check"></i></a>
+            <a href="#!" data-value="preset-5"><i class="ti ti-check"></i></a>
+            <a href="#!" data-value="preset-6"><i class="ti ti-check"></i></a>
+            <a href="#!" data-value="preset-7"><i class="ti ti-check"></i></a>
+            <a href="#!" data-value="preset-8"><i class="ti ti-check"></i></a>
+            <a href="#!" data-value="preset-9"><i class="ti ti-check"></i></a>
+            <a href="#!" data-value="preset-10"><i class="ti ti-check"></i></a>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <h6 class="mb-1">Sidebar Caption</h6>
+          <p class="text-muted text-sm">Sidebar Caption Hide/Show</p>
+          <div class="row theme-color theme-nav-caption">
+            <div class="col-6">
+              <div class="d-grid">
+                <button class="preset-btn btn active" data-value="true" onclick="layout_caption_change('true');">
+                  <span class="btn-label">Caption Show</span>
+                  <span class="pc-lay-icon"
+                    ><span></span><span></span><span><span></span><span></span></span><span></span
+                  ></span>
+                </button>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-grid">
+                <button class="preset-btn btn" data-value="false" onclick="layout_caption_change('false');">
+                  <span class="btn-label">Caption Hide</span>
+                  <span class="pc-lay-icon"
+                    ><span></span><span></span><span><span></span><span></span></span><span></span
+                  ></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="pc-rtl">
+            <h6 class="mb-1">Theme Layout</h6>
+            <p class="text-muted text-sm">LTR/RTL</p>
+            <div class="row theme-color theme-direction">
+              <div class="col-6">
+                <div class="d-grid">
+                  <button class="preset-btn btn active" data-value="false" onclick="layout_rtl_change('false');">
+                    <span class="btn-label">LTR</span>
+                    <span class="pc-lay-icon"><span></span><span></span><span></span><span></span></span>
+                  </button>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-grid">
+                  <button class="preset-btn btn" data-value="true" onclick="layout_rtl_change('true');">
+                    <span class="btn-label">RTL</span>
+                    <span class="pc-lay-icon"><span></span><span></span><span></span><span></span></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item pc-box-width">
+          <div class="pc-container-width">
+            <h6 class="mb-1">Layout Width</h6>
+            <p class="text-muted text-sm">Choose Full or Container Layout</p>
+            <div class="row theme-color theme-container">
+              <div class="col-6">
+                <div class="d-grid">
+                  <button class="preset-btn btn active" data-value="false" onclick="change_box_container('false')">
+                    <span class="btn-label">Full Width</span>
+                    <span class="pc-lay-icon"
+                      ><span></span><span></span><span></span><span><span></span></span
+                    ></span>
+                  </button>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-grid">
+                  <button class="preset-btn btn" data-value="true" onclick="change_box_container('true')">
+                    <span class="btn-label">Fixed Width</span>
+                    <span class="pc-lay-icon"
+                      ><span></span><span></span><span></span><span><span></span></span
+                    ></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-grid">
+            <button class="btn btn-light-danger" id="layoutreset">Reset Layout</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  </body>
+
 </html>

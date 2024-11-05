@@ -1,10 +1,8 @@
 <?php
-    session_start();
-if (isset($_SESSION)){
-}
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+include_once "config.php";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
@@ -18,9 +16,12 @@ if (isset($data['action'])){
 			$slug = $data['slug'];
             $descripcion = $data['descripcion'];
 			$caracteristicas = $data['caracteristicas'];
+            $brand_id = $data['brand_id'];
             $id = $ProductController->getProduct($slug);
 
-            $ProductController->update($id,$nombre,$slug,$descripcion,$caracteristicas);
+            echo $id.', '.$nombre.', '.$slug.', '.$descripcion.', '.$caracteristicas.', '.$brand_id;
+
+            $ProductController->update($id,$nombre,$slug,$descripcion,$caracteristicas, $brand_id);
             break;
         case 'edit':
             $slug = $data['slug'];
@@ -47,10 +48,11 @@ if (isset($_POST['action'])) {
 			$slug = $_POST['slug'];
             $descripcion = $_POST['descripcion'];
 			$caracteristicas = $_POST['caracteristicas'];
+            $brand_id = $_POST['brand_id'];
 
             echo'Hola entre a create_product';
 
-            $ProductController->createProduct($nombre,$slug,$descripcion, $caracteristicas);
+            $ProductController->createProduct($nombre,$slug,$descripcion, $caracteristicas, $brand_id);
 
             break;
         case 'update_product':
@@ -60,12 +62,13 @@ if (isset($_POST['action'])) {
 			$slug = $_POST['slug'];
             $descripcion = $_POST['descripcion'];
 			$caracteristicas = $_POST['caracteristicas'];
+            $brand_id = $_POST['brand_id'];
             $producto = $ProductController->getProduct($slug);
             $id = $producto->id;
 
-            echo $id.', '.$nombre.', '.$slug.', '.$descripcion.', '.$caracteristicas;
+            echo $id.', '.$nombre.', '.$slug.', '.$descripcion.', '.$caracteristicas.', '.$brand_id;
 
-            $ProductController->update($id,$nombre,$slug,$descripcion,$caracteristicas);
+            $ProductController->update($id,$nombre,$slug,$descripcion,$caracteristicas, $brand_id);
             break;
         case 'delete_product':
                 $productController = new ProductController();
@@ -149,11 +152,11 @@ class ProductController
         }
     }
 
-    public function createProduct($nombre, $slug, $descripcion, $caracteristicas){
+    public function createProduct($nombre, $slug, $descripcion, $caracteristicas, $brand_id){
         $dataUser = $_SESSION['user_data'];
         $token = $dataUser->token;
 
-        $target_path = "uploads/";
+        $target_path = BASE_PATH."App/uploads/";
         $target_path = $target_path . basename( $_FILES['uploadedfile']['name']); 
         if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
             echo "El archivo ". $target_path . 
@@ -174,13 +177,14 @@ class ProductController
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 0,
         CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, 
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array(
             'name' => $nombre,
             'slug' => $slug,
             'description' => $descripcion,
             'features' => $caracteristicas,
+            'brand_id' => $brand_id,
             'cover'=> new CURLFILE($target_path)),
         CURLOPT_HTTPHEADER => array(
             'Authorization: Bearer '.$token,
@@ -192,14 +196,14 @@ class ProductController
         $response = json_decode($response);
         
         if ($response) {
-            header('Location: ../index.php?status=ok');
+            header('Location: '.BASE_PATH.'products/ok/');
         }else{
-           header('Location: ../index.php?status=error');
+            //header('Location: '.BASE_PATH.'products/error/');
         }
 
     }
 
-    public function update($id,$nombre,$slug,$descripcion,$caracteristicas){
+    public function update($id,$nombre,$slug,$descripcion,$caracteristicas,$brand_id){
         $dataUser = $_SESSION['user_data'];
         $token = $dataUser->token;
 
@@ -208,6 +212,7 @@ class ProductController
             'slug' => $slug,
             'description' => $descripcion,
             'features' => $caracteristicas,
+            'brand_id'=> $brand_id,
             'id' => $id,
         ]);
         
@@ -237,9 +242,9 @@ class ProductController
         $response = json_decode($response);
         
         if ($response) {
-            header('Location: ../index.php?status=ok');
+            header('Location: '.BASE_PATH.'products/ok/');
         }else{
-            header('Location: ../index.php?status=error');
+            header('Location: '.BASE_PATH.'products/error/');
         }
 
     }
@@ -271,10 +276,10 @@ class ProductController
         curl_close($curl);
         $response = json_decode($response);
         
-        if (isset($response->code)) {
-            header('Location: ../index.php?status=ok');
+        if ($response) {
+            header('Location: '.BASE_PATH.'products/ok/');
         }else{
-            //header('Location: ../index.php?status=error');
+            header('Location: '.BASE_PATH.'products/error/');
         }
 
     }
